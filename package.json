@@ -6,7 +6,8 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "ios-open": "open ios/*.xcodeproj",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
-    "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "reverse": "adb reverse tcp:8081 tcp:8081 | adb reverse tcp:8080 tcp:8080 | adb reverse tcp:5678 tcp:5678",
+    "android": " node node_modules/react-native/local-cli/cli.js run-android",
     "lint": "eslint src test *.js",
     "test": "mocha --recursive --compilers js:babel-core/register -r test/setup",
     "cover": "babel-node node_modules/.bin/isparta cover _mocha -- --recursive -r test/setup",
@@ -19,6 +20,8 @@
     "lodash": "^4.3.0",
     "react": "^0.14.7",
     "react-native": "^0.24.1",
+    "react-native-extra-dimensions-android": "^0.17.0",
+    "react-native-gifted-messenger": "^0.1.2",
     "react-redux": "^4.4.0",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1"
