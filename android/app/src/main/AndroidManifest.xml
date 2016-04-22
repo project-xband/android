@@ -9,7 +9,7 @@
       android:icon="@mipmap/ic_launcher"
       android:theme="@style/AppTheme">
       <activity
-        android:name="com.xband.MainActivity"
+        android:name=".MainActivity"
         android:label="@string/app_name"
         android:windowSoftInputMode="adjustResize"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
@@ -23,7 +23,7 @@
       <service
         android:name="com.xband.usbclient.UsbService"
         android:enabled="true">
-      </service> 
+      </service>
 
     </application>
 
