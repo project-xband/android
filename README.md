@@ -1,13 +1,4 @@
-# React Native Boilerplate [![Build Status](https://travis-ci.org/jhen0409/react-native-boilerplate.svg)](https://travis-ci.org/jhen0409/react-native-boilerplate) [![Dependency Status](https://david-dm.org/jhen0409/react-native-boilerplate.svg)](https://david-dm.org/jhen0409/react-native-boilerplate) [![devDependency Status](https://david-dm.org/jhen0409/react-native-boilerplate/dev-status.svg)](https://david-dm.org/jhen0409/react-native-boilerplate#info=devDependencies)
-
-> The React Native, Redux boilerplate for personal usage
-
-## Included
-
-* [React](https://github.com/facebook/react) & [React Native](https://github.com/facebook/react-native) v0.24
-* [Redux](https://github.com/reactjs/redux) & [Remote Redux DevTools](https://github.com/zalmoxisus/remote-redux-devtools) & [On Debugger](https://github.com/jhen0409/remote-redux-devtools-on-debugger)
-* [Immutable](https://github.com/facebook/immutable-js) & [Immutable DevTools](https://github.com/andrewdavey/immutable-devtools)
-* [Babel](https://github.com/babel/babel) & Plugins: [add-module-exports](https://github.com/59naga/babel-plugin-add-module-exports), [transform-decorators-legacy](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy)
+# The "Project xBand" Android client [![Build Status](https://travis-ci.org/jhen0409/react-native-boilerplate.svg)](https://travis-ci.org/jhen0409/react-native-boilerplate) [![Dependency Status](https://david-dm.org/jhen0409/react-native-boilerplate.svg)](https://david-dm.org/jhen0409/react-native-boilerplate) [![devDependency Status](https://david-dm.org/jhen0409/react-native-boilerplate/dev-status.svg)](https://david-dm.org/jhen0409/react-native-boilerplate#info=devDependencies)
 
 ## Installation
 
@@ -18,37 +9,14 @@ $ npm install -g react-native-cli
 $ npm install
 ```
 
-Also, you can use [generator-rnb](https://github.com/jhen0409/generator-rnb) to create project with this boilerplate.
-
 ## Development
-
-#### Start local server
-
-```bash
-$ npm start
-```
-
-#### iOS
-
-Run command to open iOS simulator and run app:
-
-```bash
-$ npm run ios
-```
-
-Or open `ios/RNBoilerplate.xcodeproj` file with XCode:
-
-```bash
-$ npm run ios-open
-```
 
 #### Android (5.0+)
 
 Open Android emulator (recommented [Genymotion](https://www.genymotion.com)) and run command: (Or connect real device via USB)
 
 ```bash
-$ adb reverse tcp:8081 tcp:8081  # react-native local server
-$ adb reverse tcp:5678 tcp:5678  # remotedev local server
+$ npm run reverse  # react-native local server, remotedev local server
 $ npm run android
 ```
 
@@ -65,6 +33,7 @@ $ npm test
 ## Credits
 
 * [react-native-counter-ios-android](https://github.com/chentsulin/react-native-counter-ios-android)'s counter example.
+* [react-native-boilerplate]() for providing us with lean and functioning starter code.
 
 ## LICENSE
 
