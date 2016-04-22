@@ -5,10 +5,10 @@ import configureStore from './configureStore';
 
 const store = configureStore();
 
-const RNBoilerplate = () => (
+const xBand = () => (
   <Provider store={store}>
     <App />
   </Provider>
 );
 
-AppRegistry.registerComponent('RNBoilerplate', () => RNBoilerplate);
+AppRegistry.registerComponent('xBand', () => xBand);

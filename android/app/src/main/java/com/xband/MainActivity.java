@@ -60,7 +60,7 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "clean_project";
+        return "xBand";
     }
 
     /**
