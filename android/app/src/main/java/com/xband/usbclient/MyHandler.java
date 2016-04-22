@@ -1,18 +1,16 @@
-package com.project_xBand.usbclient;
+package com.xband.usbclient;
 
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
-import com.project_xBand.MainActivity;
+import com.xband.MainActivity;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 
 
 public class MyHandler extends Handler {

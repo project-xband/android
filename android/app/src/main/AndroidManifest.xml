@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rnboilerplate">
+    package="com.xband">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -9,7 +9,7 @@
       android:icon="@mipmap/ic_launcher"
       android:theme="@style/AppTheme">
       <activity
-        android:name=".MainActivity"
+        android:name="com.xband.MainActivity"
         android:label="@string/app_name"
         android:windowSoftInputMode="adjustResize"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
@@ -21,7 +21,7 @@
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
       <service
-        android:name="com.project_xBand.usbclient.UsbService"
+        android:name="com.xband.usbclient.UsbService"
         android:enabled="true">
       </service> 
 

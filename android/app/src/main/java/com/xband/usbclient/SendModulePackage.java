@@ -1,4 +1,4 @@
-package com.project_xBand.usbclient;
+package com.xband.usbclient;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
