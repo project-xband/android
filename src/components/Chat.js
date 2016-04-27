@@ -3,37 +3,44 @@ import React, {
 	PropTypes,
 	StyleSheet,
 	Text,
+	ScrollView,
 	View
 } from 'react-native';
-import Immutable from 'immutable';
+
 import Bubble from './Bubble';
 import AnimatedTextInput from './AnimatedTextInput';
+import _ from 'lodash';
 
 export default class Chat extends Component {
 
 	static propTypes = {
 		addMessage: PropTypes.func.isRequired,
+		conversation: PropTypes.object.isRequired,
+		conversationId: PropTypes.string.isRequired
 	}
 
 	// let's load in some bubbles
-
 	constructor(props) {
 		super(props)
+
+		console.log('chat',this.props);
 	}
 
 	render() {
-		// this should iterate over the prop and pass props down to Bubble
 		return(
-
 			<View>
-				<Bubble text='haha' position='right'/>
-				<Bubble text='ahaha' position='left'/>
-				<Bubble text="that's funny" position='right'/>
-				<Bubble text='real funny man' position='right'/>
+				<ScrollView>
+					{
+						_.map(this.props.messages, (message) => {
+							return <Bubble 	key={_.uniqueId()}
+											text={message.body}
+										   	position={message.position}/>
+						})
+					}
+				</ScrollView>
 				<AnimatedTextInput
-					text={''}
-					updateText={this.props.updateText}
-					addMessage={this.props.addMessage}/>
+						addMessage={this.props.addMessage}
+						conversation={this.props.conversation}/>
 			</View>
 		)
 	}

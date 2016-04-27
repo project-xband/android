@@ -1,17 +1,25 @@
-import _ from 'lodash';
+import UUID from 'uuid-js';
 
 const initialState = {
-    [_.uniqueId()]: {
+    [UUID.create().toString()]: {
       draft: 'Hey, I just wanted to check in if ',
       messages: [0, 1]    // <-- access 'last' sent message (first in the Array) for sorting the conversation
     },
-    [_.uniqueId()]: {
+    [UUID.create().toString()]: {
       draft: '',
-      messages: [2, 3, 4]
+      messages: [0]
     }
 }
 
 const actionsMap = {
+	addMessage(state, action) {
+		console.log('conversation action -->',action);
+		console.log('conversation state  -->',state);
+		return {
+			// here I need to add the message to the conversation
+			// action.conversation[]
+		}
+	}
 }
 
 export default (state = initialState, action) => {

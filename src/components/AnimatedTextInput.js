@@ -16,10 +16,13 @@ export default class AnimatedTextInput extends Component {
 	static propTypes = {
 		// text: PropTypes.string.isRequired,
 		addMessage: PropTypes.func.isRequired,
+		conversation: PropTypes.object.isRequired
 	}
 
 	constructor(props) {
 		super(props)
+
+		console.log('textinput', this.props)
 
 		this.state = {
 			text: ''
@@ -37,11 +40,16 @@ export default class AnimatedTextInput extends Component {
 				<TouchableHighlight
 					style={styles.sendButton}
 					onPress={ () => {
-						this.props.addMessage({  
-							from: '44.00.9.15',
-							body: this.state.text,
-							position: 'right',
-							timestamp: 'now_or_never'
+						this.props.addMessage({
+							message: {  
+								from: '44.00.9.15',
+								body: this.state.text,
+								position: 'right',
+								timestamp: 'now_or_never'
+							},
+							conversation: {
+								...this.props.conversation
+							}
 						});
 
 						console.log('hey there fucker', this.state.text);

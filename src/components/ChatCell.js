@@ -10,7 +10,8 @@ import Immutable from 'immutable';
 
 // TODO: optimise the preview of the last message (unneccerairy calls)
 const ChatCell = ({
-	lastMessage
+	lastMessage,
+	messages
 }) =>
 	<View>
 		<View style={styles.cell}>
@@ -37,8 +38,7 @@ const ChatCell = ({
 	</View>
 
 ChatCell.propTypes = {
-	// name: React.PropTypes.string.isRequired, <-- redundant? The name should be in the Message...?
-	lastMessage: React.PropTypes.instanceOf(Immutable.Map).isRequired // Immutable imo.
+	lastMessage: React.PropTypes.object.isRequired
 }
 
 ChatCell.defaultProps = {

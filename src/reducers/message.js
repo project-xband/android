@@ -2,13 +2,13 @@ import UUID from 'uuid-js';
 // import Immutable from 'immutable';
 
 const initialState = {
-	[UUID.create().toString()]: {
+	  [0]: {
       from: '44.111.2',   // <-- to find who is in conversation look at the 'from',
       position: 'right',  // <-- always 'right' on sent
       body: "Hey babe, how's xBand",
       timestamp: 'whenever'
     },
-    [UUID.create().toString()]: {
+    [1]: {
       from: '44.3.21',
       position: 'left',   // <-- always 'left' on received
       body: 'Hey, how are you doing habibi?',
@@ -30,16 +30,16 @@ const initialState = {
 
 const actionsMap = {
 	addMessage(state=initialState, action) {
-		console.log('action --> ', action)
-		console.log('state --> ', state)
+		console.log('addMessage action --> ', action)
+		console.log('addMessage state  --> ', state)
 		return {
 			...state, 
-			[UUID.create().toString()]: {
-				from: action.payload.from,
-				position: action.payload.position,
-				body: action.payload.body,
-				timestamp: action.payload.timestamp
-			}
+			[action.id]: {
+				from: action.message.from,
+				position: action.message.position,
+				body: action.message.body,
+				timestamp: action.message.timestamp
+			},
 		}
 	}
 }
