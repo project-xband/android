@@ -2,24 +2,20 @@ import React, { Component, PropTypes } from 'react-native'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Bubble from '../components/Bubble';
-import Chat from '../components/Chat';
-import ChatCell from '../components/ChatCell';
-import AnimatedTextInput from '../components/AnimatedTextInput';
+import Chats from '../components/Chats';
 
 import * as CounterActions from '../actions/counter';
 import * as MessageActions from '../actions/message';
 
 const mapStateToProps = state => {
    return {
-      messages: state.message,
+      conversation: state.conversation,
    };
 };
-const mapDispatchToProps = dispatch => bindActionCreators(MessageActions, dispatch);
 
-export default class App extends Component {
+export default class ChatList extends Component {
 	render() {
-		return <Chat {...this.props}/>
+		return <Chats {...this.props}/>
 	}
 }
 

@@ -2,29 +2,29 @@ import React, {
 	Component,
 	PropTypes,
 	StyleSheet,
+	Dimensions,
 	Text,
-	View
+	View,
+	ScrollView
 } from 'react-native';
-import Immutable from 'immutable';
-import Bubble from './Bubble';
-import AnimatedTextInput from './AnimatedTextInput';
 
-export default class Chat extends Component {
+export default class ChatList extends Component {
 
 	static propTypes = {
-		addMessage: PropTypes.func.isRequired,
+		conversations: PropTypes.Object.isRequired
 	}
 
 	// let's load in some bubbles
 
 	constructor(props) {
 		super(props)
+		console.log('hey', this.props.addMessage);
 	}
 
 	render() {
 		// this should iterate over the prop and pass props down to Bubble
 		return(
-
+			
 			<View>
 				<Bubble text='haha' position='right'/>
 				<Bubble text='ahaha' position='left'/>

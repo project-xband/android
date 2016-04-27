@@ -14,13 +14,16 @@ import React, {
 export default class AnimatedTextInput extends Component {
 
 	static propTypes = {
-		text: PropTypes.string.isRequired,
-		addMessage: PropTypes.func.isRequired
+		// text: PropTypes.string.isRequired,
+		addMessage: PropTypes.func.isRequired,
 	}
 
 	constructor(props) {
 		super(props)
-		console.log('hey', this.props.addMessage);
+
+		this.state = {
+			text: ''
+		};
 	}
 
 	render() {
@@ -28,17 +31,23 @@ export default class AnimatedTextInput extends Component {
 			<View style={styles.txtInputContainer}>
 				<TextInput
 					style={styles.txtInput}
-					defaultValue={this.props.text}
-					onChangeText={ (newText) => text=newText /* should send an action...*/}
+					defaultValue={ this.state.text }
+					onChangeText={ (text) => this.state = { text: text } /*TODO: send an action and store draft for each conversation*/}
 				/>
-				<TouchableHighlight 
+				<TouchableHighlight
 					style={styles.sendButton}
-					onPress={this.props.addMessage({ 
-													from: '44.00.9.15',
-													body: this.props.text,
-													position: 'right',
-													timestamp: 'now_or_never'
-													})}>
+					onPress={ () => {
+						this.props.addMessage({  
+							from: '44.00.9.15',
+							body: this.state.text,
+							position: 'right',
+							timestamp: 'now_or_never'
+						});
+
+						console.log('hey there fucker', this.state.text);
+
+						this.state = { text: '' } 
+					}}>
 					<Text style={styles.sendButtonText}>
 						{'Send'}
 					</Text>
