@@ -10,16 +10,12 @@ import AnimatedTextInput from '../components/AnimatedTextInput';
 import * as CounterActions from '../actions/counter';
 import * as MessageActions from '../actions/message';
 
-console.log(MessageActions);
+const mapStateToProps = state => state.messages;
+const mapDispatchToProps = dispatch => bindActionCreators(MessageActions, dispatch);
 
-@connect(
-  state => ({
-    counter: state.counter,   
-  })
-)
-export default class App extends Component {	
+@connect(mapStateToProps, mapDispatchToProps)(App)
+export default class App extends Component {
 	render() {
-		const actions = bindActionCreators(MessageActions, this.props.dispatch)
-		return <Chat {...actions} />
+		return <Chat {...this.props}/>
 	}
 }

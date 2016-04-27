@@ -3,7 +3,6 @@ import React, {
   PropTypes,
   StyleSheet,
   Dimensions,
-  // Animated,
   Text,
   TextInput,
   View,
@@ -12,40 +11,40 @@ import React, {
 // import Button from 'react-native-button';
 
 // how to animate the send button? what props do I pass down?
-const AnimatedTextInput = ({
-	text,
-	sendMessage
-}) =>
-	<View style={styles.txtInputContainer}>
-		<TextInput
-			style={styles.txtInput}
-			defaultValue={text}
-			onChangeText={ (newText) => text=newText /* should send an action...*/}
-		/>
-		<TouchableHighlight 
-			style={styles.sendButton}
-			onPress={sendMessage(text)}>
-			<Text style={styles.sendButtonText}>
-				{'Send'}
-			</Text>
-		</TouchableHighlight>
-	</View>
+export default class AnimatedTextInput extends Component {
 
-AnimatedTextInput.propTypes = {
-	text: React.PropTypes.string.isRequired,
-	sendMessage: React.PropTypes.func.isRequired
-}
+	static propTypes = {
+		text: PropTypes.string.isRequired,
+		addMessage: PropTypes.func.isRequired
+	}
 
-AnimatedTextInput.defaultProps = {
-	...Component.defaultProps,
-	text: 'xBand is swank!',
-	sendMessage: function(text) {
-		/* 
-			send an action with the text? fuckkkkkkkkkkkk
-			I should be using redux, just I can't piece it together
-		*/
+	constructor(props) {
+		super(props)
+		console.log('hey', this.props.addMessage);
+	}
 
-		console.log('message sent! --> ', text);
+	render() {
+		return(
+			<View style={styles.txtInputContainer}>
+				<TextInput
+					style={styles.txtInput}
+					defaultValue={this.props.text}
+					onChangeText={ (newText) => text=newText /* should send an action...*/}
+				/>
+				<TouchableHighlight 
+					style={styles.sendButton}
+					onPress={this.props.addMessage({ 
+													from: '44.00.9.15',
+													body: this.props.text,
+													position: 'right',
+													timestamp: 'now_or_never'
+													})}>
+					<Text style={styles.sendButtonText}>
+						{'Send'}
+					</Text>
+				</TouchableHighlight>
+			</View>
+		)
 	}
 }
 
