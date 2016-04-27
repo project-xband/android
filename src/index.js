@@ -4,7 +4,7 @@ import App from './containers/App';
 import ChatList from './containers/ChatList';
 import configureStore from './configureStore';
 
-import { Actions, Scene, Router } from 'react-native-router-flux';
+import { Scene, Router } from 'react-native-router-flux';
 
 const store = configureStore();
 
@@ -13,10 +13,10 @@ const RouterWithRedux = connect()(Router);
 // TODO: add the Router here - How does it interplay with Redux? :C
 const xBand = () => (
   <Provider store={store}>
-	<RouterWithRedux>
-		<Scene key='root'/>
-
-        </Scene>
+    <RouterWithRedux>
+		<Scene key='root'>
+			<Scene key="App" component={App} title="Chat"/>
+		</Scene>
     </RouterWithRedux>
   </Provider>
 );

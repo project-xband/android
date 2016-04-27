@@ -19,14 +19,9 @@ const mapDispatchToProps = dispatch => bindActionCreators(MessageActions, dispat
 class App extends Component {
 	render() {
 		return (
-			<RouterWithRedux>
-				<Scene key='root'>
-					<Scene key="chat" component={Chat} title="Chat"/>
-				</Scene>
-			</RouterWithRedux>
+			<Chat {...this.props}/>
 		)
 	}
-	// <Chat {...this.props}/>
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
