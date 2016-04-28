@@ -17,20 +17,20 @@ const ChatCell = ({
 		<View style={styles.cell}>
 			<View style={styles.image}>
 				<Text style={styles.initial}>
-					{lastMessage.from.charAt(0)}
+					{lastMessage.get('from').charAt(0)}
 				</Text>
 			</View>
 			<View style={{ flexDirection: 'column', padding: 10 }}>
 				<View style={{ flexDirection: 'row', marginTop: 10}}>
 					<Text style={styles.name}>
-						{lastMessage.from}
+						{lastMessage.get('from')}
 					</Text>
 					<Text style={styles.day}>
-						{lastMessage.time}
+						{lastMessage.get('time')}
 					</Text>
 				</View>
 				<Text style={styles.msgPreview}>
-					{(lastMessage.body.length > 30) ? lastMessage.body.substring(0, 30) + '...' : lastMessage.body}
+					{(lastMessage.get('message').length > 30) ? lastMessage.get('message').substring(0, 30) + '...' : lastMessage.get('message')}
 				</Text>
 			</View>
 		</View>
