@@ -1,8 +1,11 @@
 import React, { AppRegistry } from 'react-native';
 import { Provider, connect } from 'react-redux';
+import configureStore from './configureStore';
+
+// components
 import App from './containers/App';
 import ChatList from './containers/ChatList';
-import configureStore from './configureStore';
+import ChatContainer from './containers/ChatContainer';
 
 import { Scene, Router } from 'react-native-router-flux';
 
@@ -15,7 +18,10 @@ const xBand = () => (
   <Provider store={store}>
     <RouterWithRedux>
 		<Scene key='root'>
-			<Scene key="App" component={App} title="Chat"/>
+			<Scene key="App" component={App}>
+				<Scene key="ChatList" component={ChatList} title="Chats"/>
+				<Scene key="ChatContainer" component={ChatContainer} title="[friend name]"/>
+			</Scene>
 		</Scene>
     </RouterWithRedux>
   </Provider>

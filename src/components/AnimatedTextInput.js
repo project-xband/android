@@ -10,6 +10,8 @@ import React, {
 } from 'react-native';
 // import Button from 'react-native-button';
 
+import {Actions} from 'react-native-router-flux'
+
 // how to animate the send button? what props do I pass down?
 export default class AnimatedTextInput extends Component {
 
@@ -40,8 +42,13 @@ export default class AnimatedTextInput extends Component {
 				<TouchableHighlight
 					style={styles.sendButton}
 					onPress={ () => {
+
+						Actions.ChatList()
+						console.log('Actions',Actions)
+						console.log('Actions chatlist', Actions.ChatList)
+
 						this.props.addMessage({
-							message: {  
+							message: {
 								from: '44.00.9.15',
 								body: this.state.text,
 								position: 'right',
@@ -52,9 +59,7 @@ export default class AnimatedTextInput extends Component {
 							}
 						});
 
-						console.log('hey there fucker', this.state.text);
-
-						this.state = { text: '' } 
+						this.state = { text: '' }
 					}}>
 					<Text style={styles.sendButtonText}>
 						{'Send'}
@@ -85,7 +90,7 @@ const styles = StyleSheet.create({
 	sendButton: {
 		flex: 1,
 		justifyContent: 'center',
-		marginRight: 10
+		marginRight: 10,
 		// backgroundColor: '#757575'
 	},
 	sendButtonText: {
