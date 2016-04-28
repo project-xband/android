@@ -6,10 +6,12 @@ import reducer from './reducers';
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 import * as storage from 'redux-storage';
 
+// import { dummyData } from './dummyData';
+
 let enhancer;
 
 // create the engine with 'xband-to-moon' as the storage key
-const engine = createEngine('xband-to-moon');
+const engine = createEngine('xband-to-moons');
 
 // add the storage engine middleware spice
 const engineMiddleware = storage.createMiddleware(engine);
@@ -33,7 +35,7 @@ if (__DEV__) {
   enhancer = applyMiddleware(...middlewares);
 }
 
-export default function configureStore(initialState) {
+export default function configureStore(initialState={}) {
   const store = createStore(reducer, initialState, enhancer);
 
   // if using hot modules replace the reducers

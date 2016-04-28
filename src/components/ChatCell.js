@@ -10,26 +10,27 @@ import Immutable from 'immutable';
 
 // TODO: optimise the preview of the last message (unneccerairy calls)
 const ChatCell = ({
-	lastMessage
+	lastMessage,
+	messages
 }) =>
 	<View>
 		<View style={styles.cell}>
 			<View style={styles.image}>
 				<Text style={styles.initial}>
-					{lastMessage.get('from').charAt(0)}
+					{((lastMessage.from === "undefined") ? lastMessage.from.charAt(0) : "X") /* <- this bitch is sometimes undefined.. maybe it's the numberes?*/}
 				</Text>
 			</View>
 			<View style={{ flexDirection: 'column', padding: 10 }}>
 				<View style={{ flexDirection: 'row', marginTop: 10}}>
 					<Text style={styles.name}>
-						{lastMessage.get('from')}
+						{lastMessage.from}
 					</Text>
 					<Text style={styles.day}>
-						{lastMessage.get('time')}
+						{lastMessage.timestamp}
 					</Text>
 				</View>
 				<Text style={styles.msgPreview}>
-					{(lastMessage.get('message').length > 30) ? lastMessage.get('message').substring(0, 30) + '...' : lastMessage.get('message')}
+					{(!lastMessage.body === "undefined" && lastMessage.body.length > 30) ? lastMessage.body.substring(0, 30) + '...' : lastMessage.body}
 				</Text>
 			</View>
 		</View>
@@ -37,8 +38,7 @@ const ChatCell = ({
 	</View>
 
 ChatCell.propTypes = {
-	// name: React.PropTypes.string.isRequired, <-- redundant? The name should be in the Message...?
-	lastMessage: React.PropTypes.instanceOf(Immutable.Map).isRequired // Immutable imo.
+	lastMessage: React.PropTypes.object.isRequired
 }
 
 ChatCell.defaultProps = {

@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react-native'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Router } from 'react-native-router-flux';
 
+import Bubble from '../components/Bubble';
 import Chat from '../components/Chat';
-import * as MessageActions from '../actions/message';
+import ChatCell from '../components/ChatCell';
+import AnimatedTextInput from '../components/AnimatedTextInput';
 
-const RouterWithRedux = connect()(Router);
+import * as MessageActions from '../actions/message';
 
 const mapStateToProps = state => {
    return {
@@ -14,14 +15,14 @@ const mapStateToProps = state => {
       conversation: state.conversation
    };
 };
+
 const mapDispatchToProps = dispatch => bindActionCreators(MessageActions, dispatch);
 
-class App extends Component {
+class ChatContainer extends Component {
 	render() {
-		return (
-			this.props.children
-		)
+		console.log('chat cont props',this.props)
+		return <Chat {...this.props}/>
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);

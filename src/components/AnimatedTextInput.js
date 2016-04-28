@@ -3,7 +3,6 @@ import React, {
   PropTypes,
   StyleSheet,
   Dimensions,
-  // Animated,
   Text,
   TextInput,
   View,
@@ -11,41 +10,61 @@ import React, {
 } from 'react-native';
 // import Button from 'react-native-button';
 
+import { Actions } from 'react-native-router-flux'
+
 // how to animate the send button? what props do I pass down?
-const AnimatedTextInput = ({
-	text,
-	sendMessage
-}) =>
-	<View style={styles.txtInputContainer}>
-		<TextInput
-			style={styles.txtInput}
-			defaultValue={text}
-			onChangeText={ (newText) => text=newText /* should send an action...*/}
-		/>
-		<TouchableHighlight 
-			style={styles.sendButton}
-			onPress={sendMessage(text)}>
-			<Text style={styles.sendButtonText}>
-				{'Send'}
-			</Text>
-		</TouchableHighlight>
-	</View>
+export default class AnimatedTextInput extends Component {
 
-AnimatedTextInput.propTypes = {
-	text: React.PropTypes.string.isRequired,
-	sendMessage: React.PropTypes.func.isRequired
-}
+	static propTypes = {
+		// text: PropTypes.string.isRequired,
+		addMessage: PropTypes.func.isRequired,
+		conversation: PropTypes.object.isRequired
+	}
 
-AnimatedTextInput.defaultProps = {
-	...Component.defaultProps,
-	text: 'xBand is swank!',
-	sendMessage: function(text) {
-		/* 
-			send an action with the text? fuckkkkkkkkkkkk
-			I should be using redux, just I can't piece it together
-		*/
+	constructor(props) {
+		super(props)
 
-		console.log('message sent! --> ', text);
+		console.log('textinput', this.props)
+
+		this.state = {
+			text: ''
+		};
+	}
+
+	render() {
+		return(
+			<View style={styles.txtInputContainer}>
+				<TextInput
+					style={styles.txtInput}
+					defaultValue={ this.state.text }
+					onChangeText={ (text) => this.state = { text: text } /*TODO: send an action and store draft for each conversation*/}
+				/>
+				<TouchableHighlight
+					underlayColor='transparent'
+					style={styles.sendButton}
+					onPress={ () => {
+
+						this.props.addMessage({
+							message: {
+								from: '44.00.9.15',
+								body: this.state.text,
+								position: 'right',
+								timestamp: 'now_or_never'
+							},
+							conversation: {
+								...this.props.conversation
+								// ^^^^ to edit the conversation so I can add the msg
+							}
+						});
+
+						this.setState({ text: '' });
+					}}>
+					<Text style={styles.sendButtonText}>
+						{'Send'}
+					</Text>
+				</TouchableHighlight>
+			</View>
+		)
 	}
 }
 
@@ -69,7 +88,7 @@ const styles = StyleSheet.create({
 	sendButton: {
 		flex: 1,
 		justifyContent: 'center',
-		marginRight: 10
+		marginRight: 10,
 		// backgroundColor: '#757575'
 	},
 	sendButtonText: {

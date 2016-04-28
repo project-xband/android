@@ -4,36 +4,45 @@ import React, {
 	StyleSheet,
 	Text,
 	View,
+	ScrollView,
   DeviceEventEmitter
 } from 'react-native';
-import Immutable from 'immutable';
+
 import Bubble from './Bubble';
 import AnimatedTextInput from './AnimatedTextInput';
 import SendModuleAndroid from './SendModuleAndroid';
+import _ from 'lodash';
 
 export default class Chat extends Component {
 
 	static propTypes = {
-		// unsure how to structure this, should use the redux store directly?
 		addMessage: PropTypes.func.isRequired,
+		conversation: PropTypes.object.isRequired,
+		conversationId: PropTypes.string.isRequired
 	}
 
 	// let's load in some bubbles
-
 	constructor(props) {
 		super(props)
-		console.log('hey', this.props.addMessage);
+
+		console.log('chat',this.props);
 	}
 
 	render() {
-		// this should iterate over the prop and pass props down to Bubble
 		return(
 			<View>
-				<Bubble text='haha' position='right'/>
-				<Bubble text='ahaha' position='left'/>
-				<Bubble text="that's funny" position='right'/>
-				<Bubble text='real funny man' position='right'/>
-				<AnimatedTextInput addMessage={this.props.addMessage}/>
+				<ScrollView>
+					{
+						_.map(this.props.messages, (message) => {
+							return <Bubble 	key={_.uniqueId()}
+											text={message.body}
+										   	position={message.position}/>
+						})
+					}
+				</ScrollView>
+				<AnimatedTextInput
+						addMessage={this.props.addMessage}
+						conversation={this.props.conversation}/>
 			</View>
 		)
 	}
