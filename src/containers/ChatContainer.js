@@ -20,6 +20,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(MessageActions, dispat
 
 class ChatContainer extends Component {
 	render() {
+		console.log('chat cont props',this.props)
 		return <Chat {...this.props}/>
 	}
 }

@@ -26,4 +26,4 @@ const xBand = () => (
 );
 
 AppRegistry.registerComponent('RNBoilerplate', () => xBand);
-//TODO: change 'RNBoilerplate' to 'xBand' ^^^
+//TODO: change 'RNBoilerplate' to 'xBand' ^^^r

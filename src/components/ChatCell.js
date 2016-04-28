@@ -17,7 +17,7 @@ const ChatCell = ({
 		<View style={styles.cell}>
 			<View style={styles.image}>
 				<Text style={styles.initial}>
-					{lastMessage.from.charAt(0)}
+					{((lastMessage.from === "undefined") ? lastMessage.from.charAt(0) : "X") /* <- this bitch is sometimes undefined.. maybe it's the numberes?*/}
 				</Text>
 			</View>
 			<View style={{ flexDirection: 'column', padding: 10 }}>
@@ -30,7 +30,7 @@ const ChatCell = ({
 					</Text>
 				</View>
 				<Text style={styles.msgPreview}>
-					{(lastMessage.body.length > 30) ? lastMessage.body.substring(0, 30) + '...' : lastMessage.body}
+					{(!lastMessage.body === "undefined" && lastMessage.body.length > 30) ? lastMessage.body.substring(0, 30) + '...' : lastMessage.body}
 				</Text>
 			</View>
 		</View>

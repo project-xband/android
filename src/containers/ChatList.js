@@ -1,9 +1,10 @@
-import React, { Component, PropTypes, View, Text, ScrollView } from 'react-native'
+import React, { Component, PropTypes, View, ScrollView, TouchableOpacity, TouchableHighlight } from 'react-native'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
 import ChatCell from '../components/ChatCell';
+import {Actions} from 'react-native-router-flux'
 
 const mapStateToProps = state => {
    return {
@@ -32,10 +33,23 @@ class ChatList extends Component {
 						wrap in a touchableopacity to get the onTouch event
 						and call and call action to route with the conversation key
 					*/
-					_.map(this.lastMessage(), (message) => {
-						console.log('message',message);
-						return <ChatCell lastMessage={message}
-										 key={_.uniqueId()}/>
+					_.map(this.lastMessage(), (keys) => {
+						console.log('keys', keys);
+						conversationKey = keys.conversationKey
+						message 		= this.props.messages[keys.messageKey]
+
+						// console.log('conversationKey', conversationKey)
+						// console.log('message', message)
+
+						return (
+							<TouchableOpacity onPress={ () => { Actions.ChatContainer({conversationKey: conversationKey}) /*how do I pass the conversation key? 
+																				the usual method described in the docs can't work
+																				because it's calling the action in the  */}}
+											  key={_.uniqueId()}>
+								<ChatCell lastMessage={message}
+										  key={_.uniqueId()}/>
+							</TouchableOpacity>
+						)
 					})
 				}
 			</ScrollView>
@@ -43,25 +57,24 @@ class ChatList extends Component {
 	}
 
 	lastMessage() {
-
-		console.log('chat list props',this.props);
-
+		// console.log('chat list props',this.props);
 		lastMsgKeys = _.map(this.props.conversation, (conv, key) => {
 			return {
 				conversationKey: key,
 				messageKey: conv.messages.pop()
 			}
 		})
+		// this returns tuples of (conversationKey, messageKey)
+		console.log('lastMsgKeys ', lastMsgKeys)
+		return lastMsgKeys
 
-		console.log('lastMsgKeys',lastMsgKeys);
-
-		lastMsges = _.map(lastMsgKeys, (keys) => {
-			return this.props.messages[keys.messageKey]
-		})
-
-		console.log('last msges',lastMsges);
-
-		return lastMsges
+		// console.log('lastMsgKeys',lastMsgKeys);
+		// lastMsges = _.map(lastMsgKeys, (keys) => {
+		// 	return this.props.messages[keys.messageKey]
+		// })
+		// console.log('last msges',lastMsges);
+		// this returns the last messages of every conversation
+		// return lastMsges
 	}
 }
 
