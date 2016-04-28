@@ -8,8 +8,9 @@ import {Actions} from 'react-native-router-flux'
 
 const mapStateToProps = state => {
    return {
+   	  isLoaded: state.storage.isLoaded,
       conversation: state.conversation,
-      messages: state.message
+      messages: state.message,
    };
 };
 
@@ -24,6 +25,11 @@ const mapStateToProps = state => {
 
 class ChatList extends Component {
 	render() {
+		if (!this.props.isLoaded) {
+			console.log('is not loaded')
+			return <View/>
+		}
+		console.log('is loaded')
 		
 		// return ( <Text style={{marginTop: 100}}>Hey</Text>)
 		return (
@@ -41,10 +47,11 @@ class ChatList extends Component {
 						// console.log('conversationKey', conversationKey)
 						// console.log('message', message)
 
+						// the conversation keys don't get assigned when the cell instatiates
+						// but at runtime when you press the cell, result -> all keys are the same one
+
 						return (
-							<TouchableOpacity onPress={ () => { Actions.ChatContainer({conversationKey: conversationKey}) /*how do I pass the conversation key? 
-																				the usual method described in the docs can't work
-																				because it's calling the action in the  */}}
+							<TouchableOpacity onPress={ () => { Actions.ChatContainer({ conversationKey: conversationKey })}}
 											  key={_.uniqueId()}>
 								<ChatCell lastMessage={message}
 										  key={_.uniqueId()}/>

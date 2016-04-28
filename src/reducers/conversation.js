@@ -1,11 +1,11 @@
 import UUID from 'uuid-js';
 
 const initialState = {
-    [UUID.create().toString()]: {
+    ['h4rdc0d3d']: {
       draft: 'Hey, I just wanted to check in if ',
       messages: [0, 1]    // <-- access 'last' sent message (first in the Array) for sorting the conversation
     },
-    [UUID.create().toString()]: {
+    ['h4rdc0d3d2']: {
       draft: '',
       messages: [0]
     }
@@ -17,7 +17,7 @@ const actionsMap = {
 		console.log('conversation state  -->',state);
 		return {
 			// here I need to add the message to the conversation
-			// action.conversation[]
+			// action.conversation[]\
 		}
 	}
 }
@@ -26,9 +26,9 @@ export default (state = initialState, action) => {
 
 	// map the "action.type" to an action within the "actionsMap" and create reduceFn
 	const reduceFn = actionsMap[action.type];
- 
+ 	console.log('conversation reducer', state)
 	// return the original state if "action.type" doesn't map to any action
-	if (!reduceFn) return state;
+	if (!reduceFn) return state;	
 
 	// return reducer
 	return reduceFn(state, action);

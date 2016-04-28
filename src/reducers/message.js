@@ -14,13 +14,13 @@ const initialState = {
       body: 'Hey, how are you doing habibi?',
       timestamp: 'whenever'
     },
-    [UUID.create().toString()]: {
+    ['h4rdc0d3dm3ss4ge']: {
       from: '44.3.21',
       position: 'left',
       body: "xBand is the coolest",
       timestamp: 'whenever'
     },
-    [UUID.create().toString()]: {
+    ['h4rdc0d3dm3ss4ge']: {
       from: '44.3.21',
       position: 'left',
       body: "xBand is swank",

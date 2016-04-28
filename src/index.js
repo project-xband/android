@@ -8,7 +8,7 @@ import ChatList from './containers/ChatList';
 import ChatContainer from './containers/ChatContainer';
 
 import { Scene, Router } from 'react-native-router-flux';
-
+global.isLoaded = false
 const store = configureStore();
 
 const RouterWithRedux = connect()(Router);
@@ -23,7 +23,8 @@ const xBand = () => (
 		</Scene>
     </RouterWithRedux>
   </Provider>
-);
+);	
 
 AppRegistry.registerComponent('RNBoilerplate', () => xBand);
 //TODO: change 'RNBoilerplate' to 'xBand' ^^^r
+

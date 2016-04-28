@@ -5,13 +5,15 @@ import thunk from 'redux-thunk';
 import reducer from './reducers';
 import createEngine from 'redux-storage-engine-reactnativeasyncstorage';
 import * as storage from 'redux-storage';
+import filter from 'redux-storage-decorator-filter'
 
 // import { dummyData } from './dummyData';
 
 let enhancer;
 
 // create the engine with 'xband-to-moon' as the storage key
-const engine = createEngine('xband-to-moons');
+let engine = createEngine('xband-to-moons');
+engine = filter(engine, [], ['storage'])
 
 // add the storage engine middleware spice
 const engineMiddleware = storage.createMiddleware(engine);
@@ -52,8 +54,14 @@ export default function configureStore(initialState={}) {
   const load = storage.createLoader(engine);
 
   load(store)
-    .then((loadedState) => console.log('Loaded state! ->', loadedState))
-    .catch(() => console.log('Failed to load previous state'));
+    .then((loadedState) => {
+      console.log('Loaded state! ->', loadedState)    
+      store.dispatch({
+        type: 'IS_LOADED',
+      })
+      global.isLoaded = true
+    })
+    .catch(() => console.log('Failed to load previous state'));  
 
-  return store;
+  return store
 }
