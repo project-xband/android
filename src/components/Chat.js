@@ -3,11 +3,13 @@ import React, {
 	PropTypes,
 	StyleSheet,
 	Text,
-	View
+	View,
+  DeviceEventEmitter
 } from 'react-native';
 import Immutable from 'immutable';
 import Bubble from './Bubble';
 import AnimatedTextInput from './AnimatedTextInput';
+import SendModuleAndroid from './SendModuleAndroid';
 
 export default class Chat extends Component {
 
