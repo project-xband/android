@@ -17,7 +17,10 @@ public class MyHandler extends Handler {
 
     private final WeakReference<MainActivity> mActivity;
     private ReactContext someContext;
-    private char[] buffer = new char[64];
+    private byte[] buffer = new byte[255];
+
+    private int packetLength;
+    private byte[] packetData;
 
     public MyHandler(MainActivity activity) {
         mActivity = new WeakReference<MainActivity>(activity);
@@ -32,11 +35,76 @@ public class MyHandler extends Handler {
                 .emit(eventName, params);
     }
 
+    public byte[] extractPacket(byte[] framedPacketData,
+                              int framePacketLength) {
+        int index;
+        int vindex = 0;
+        int endOfFramedData;
+        int consumedLength = 0;
+        int calculatedLength = 0;
+        boolean flag = false;
+        byte[] framedData;
+        byte[] unframedData;
+
+        packetLength = 0;
+        packetData = null;
+
+
+        endOfFramedData = framePacketLength;
+        framedData = framedPacketData;
+
+        if ('{' == framedData[vindex]) {
+            vindex++;
+
+            for (; vindex < endOfFramedData; vindex++) {
+                if ('%' == framedData[vindex]) {
+                    vindex++;
+                } else {
+                    if ('}' == framedData[vindex]) {
+                        consumedLength = vindex - 1;
+                        flag = true;
+                        break;
+                    }
+                }
+                calculatedLength++;
+            }
+            if (!flag) return null;
+
+            unframedData = new byte[calculatedLength + 2];
+
+            vindex = 1;
+
+            for (index = 0; index < calculatedLength; index++) {
+                if ('%' == framedData[vindex]) {
+                    vindex++;
+                    switch (framedData[vindex]) {
+                        case '[':
+                            unframedData[index] = '{';
+                            break;
+                        case ']':
+                            unframedData[index] = '}';
+                            break;
+                        default:
+                            unframedData[index] = framedData[vindex];
+                            break;
+                    }
+                    vindex++;
+                } else {
+                    unframedData[index] = framedData[vindex++];
+                }
+            }
+
+            packetLength = calculatedLength;
+            return unframedData;
+        }
+        return null;
+    }
+
     private final char CLEAR = 0;
     private final char STARTED = 1;
     private final char SYNC_CHARACTER = '{';
     private final char TERMINATOR_CHARACTER = '}';
-    private final int INPUT_LENGTH = 50;
+    private final int INPUT_LENGTH = 250;
 
     private char incomingByte;   // for incoming serial data
     private char reliableLength;
@@ -61,17 +129,22 @@ public class MyHandler extends Handler {
 
                     if (STARTED == commandState) {
                         if (TERMINATOR_CHARACTER == incomingByte) {
+                            commandBuffer[commandIndex] = (byte) incomingByte;
+                            commandIndex++;
                             commandBuffer[commandIndex] = 0;
+
+                            byte[] temp = extractPacket(commandBuffer, commandIndex);
+
                             WritableMap params = Arguments.createMap();
-                            params.putString("content", new String(commandBuffer));
+                            params.putString("content", new String(temp));
                             sendEvent("message", params);
 
                             commandIndex = 0;
                             commandState = CLEAR;
                         } else {
-                            commandBuffer[commandIndex] = incomingByte;
-                            commandIndex ++;
-                            if (INPUT_LENGTH< commandIndex) {
+                            commandBuffer[commandIndex] = (byte)  incomingByte;
+                            commandIndex++;
+                            if (INPUT_LENGTH < commandIndex) {
                                 WritableMap params = Arguments.createMap();
                                 params.putString("content", "{too much data}");
                                 sendEvent("message", params);
