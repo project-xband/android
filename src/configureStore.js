@@ -11,7 +11,7 @@ import * as storage from 'redux-storage';
 let enhancer;
 
 // create the engine with 'xband-to-moon' as the storage key
-const engine = createEngine('xband-to-moons');
+const engine = createEngine('xband-to-moon');
 
 // add the storage engine middleware spice
 const engineMiddleware = storage.createMiddleware(engine);

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, View } from 'react-native'
+import React, { Component, PropTypes, View, Text, ScrollView } from 'react-native'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -14,33 +14,43 @@ const mapStateToProps = state => {
 
 class ChatList extends Component {
 	render() {
+		
+		// return ( <Text style={{marginTop: 100}}>Hey</Text>)
 		return (
-			<View>
+			<ScrollView style={{ marginTop: 60 }}>
 				{
 					/* 
 						wrap in a touchableopacity to get the onTouch event
 						and call and call action to route with the conversation key
 					*/
 					_.map(this.lastMessage(), (message) => {
-						console.log(message); // <- last message
-						return <ChatCell lastMessage={message}/>
+						console.log('message',message);
+						return <ChatCell lastMessage={message}
+										 key={_.uniqueId()}/>
 					})
 				}
-			</View>
+			</ScrollView>
 		)
 	}
 
 	lastMessage() {
 
-		lastMsgKeys = _.map(this.props.conversation, (conv) => { 
-			return conv.messages.pop()
+		console.log('props of chat list',this.props);
+
+		lastMsgKeys = _.map(this.props.conversation, (conv, key) => {
+			return {
+				conversationKey: key,
+				messageKey: conv.messages.pop()
+			}
 		})
 
-		lastMsges = _.map(lastMsgKeys, (key) => {
-			return this.props.messages[key]
+		console.log('lastMsgKeys',lastMsgKeys);
+
+		lastMsges = _.map(lastMsgKeys, (keys) => {
+			return this.props.messages[keys.messageKey]
 		})
 
-		console.log(lastMsges);
+		console.log('last msges',lastMsges);
 
 		return lastMsges
 	}

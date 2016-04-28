@@ -45,6 +45,7 @@ export default class AnimatedTextInput extends Component {
 
 						Actions.ChatList()
 						console.log('Actions',Actions)
+						// console.log('Actions chatlist', Actions.ChatList())
 						console.log('Actions chatlist', Actions.ChatList)
 
 						this.props.addMessage({
@@ -59,7 +60,7 @@ export default class AnimatedTextInput extends Component {
 							}
 						});
 
-						this.state = { text: '' }
+						this.setState({ text: '' });
 					}}>
 					<Text style={styles.sendButtonText}>
 						{'Send'}

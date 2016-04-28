@@ -18,10 +18,8 @@ const xBand = () => (
   <Provider store={store}>
     <RouterWithRedux>
 		<Scene key='root'>
-			<Scene key="App" component={App}>
-				<Scene key="ChatList" component={ChatList} title="Chats"/>
-				<Scene key="ChatContainer" component={ChatContainer} title="[friend name]"/>
-			</Scene>
+			<Scene key="ChatList" component={ChatList} title="Chats" initial={true}/>
+			<Scene key="ChatContainer" component={ChatContainer} title="[friend name]"/>
 		</Scene>
     </RouterWithRedux>
   </Provider>
