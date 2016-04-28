@@ -3,12 +3,14 @@ import React, {
 	PropTypes,
 	StyleSheet,
 	Text,
+	View,
 	ScrollView,
-	View
+  DeviceEventEmitter
 } from 'react-native';
 
 import Bubble from './Bubble';
 import AnimatedTextInput from './AnimatedTextInput';
+import SendModuleAndroid from './SendModuleAndroid';
 import _ from 'lodash';
 
 export default class Chat extends Component {
