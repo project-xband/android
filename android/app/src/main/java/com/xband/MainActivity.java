@@ -14,6 +14,7 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 import ca.jaysoo.extradimensions.ExtraDimensionsPackage;
 
@@ -24,6 +25,12 @@ import java.util.List;
 import java.util.Set;
 
 public class MainActivity extends ReactActivity {
+
+    static {
+        System.loadLibrary("hello-jni");
+    }
+    public native String stringFromJNI();
+//    public native String unimplementedStringFromJNI();
 
     private static ReactInstanceManager sReactInstanceManager = null;
     private ReactContext sReactContext = null;
@@ -141,6 +148,7 @@ public class MainActivity extends ReactActivity {
 
         super.onCreate(savedInstanceState);
         mHandler = new MyHandler(this);
+        Log.e("fresh", stringFromJNI());
         if (usbService != null) {
 //            display.append(data);
 //            usbService.write(data.getBytes());
