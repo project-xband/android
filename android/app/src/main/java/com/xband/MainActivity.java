@@ -29,7 +29,9 @@ public class MainActivity extends ReactActivity {
     static {
         System.loadLibrary("hello-jni");
     }
-    public native String stringFromJNI();
+    public native String testInitSetup();
+    public native String testByteArray();
+    public native String testSendMessage();
 //    public native String unimplementedStringFromJNI();
 
     private static ReactInstanceManager sReactInstanceManager = null;
@@ -148,7 +150,8 @@ public class MainActivity extends ReactActivity {
 
         super.onCreate(savedInstanceState);
         mHandler = new MyHandler(this);
-        Log.e("fresh", stringFromJNI());
+        testInitSetup();
+        testSendMessage();
         if (usbService != null) {
 //            display.append(data);
 //            usbService.write(data.getBytes());
