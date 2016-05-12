@@ -13,6 +13,8 @@
 
 void testSend(const char * pMessage);
 
+char const * testget(void);
+
 typedef struct sMessage_t
 {
     DEVICE_ID destinationDeviceID;

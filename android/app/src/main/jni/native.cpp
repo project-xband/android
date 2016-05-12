@@ -53,11 +53,20 @@ Java_com_xband_MainActivity_testByteArray(JNIEnv *env, jobject jobj)
 }
 
 JNIEXPORT jstring JNICALL
-Java_com_xband_MainActivity_testSendMessage(JNIEnv * env, jobject thiz)
+Java_com_xband_MainActivity_testSendMessage(JNIEnv * env, jobject thiz, jstring rawData)
 {
-    const char * messageData = "lol what messageData";
+
+    const char * messageData = (env)->GetStringUTFChars(rawData , 0);
     testSend(messageData);
+//    testget();
     return (env)->NewStringUTF(" message data from testsend");
+}
+
+JNIEXPORT jstring JNICALL
+Java_com_xband_MainActivity_testGetMessage(JNIEnv * env, jobject thiz)
+{
+    testget();
+    return (env)->NewStringUTF(" message data from testget");
 }
 
 
@@ -962,46 +971,46 @@ void transmitPacket (packets * packet)
 
     //-----------------------------Java node edit start----------------------------------------
 
-    BYTE * pFramedData;
-    WORD framedLength;
+//    BYTE * pFramedData;
+//    WORD framedLength;
 
-    {
-        framePacket (& pFramedData, & framedLength, (BYTE *) packet, sizeof(packets));
-
-        //----------------------------- recent-edit --//
-
-        char * literal = new char[framedLength*3];
-        int literalLength = 0;
-        for (int i = 0; i < framedLength; i++)
-            literalLength += sprintf(literal + literalLength, "%d ", pFramedData[i]);
-
-//        printf ("%s\n", literal);
-
-        __android_log_print(ANDROID_LOG_DEBUG, "FRAMEDDATA_TAG", "\n hi i packet with info: %s \n", literal);
-
+//    {
+//        framePacket (& pFramedData, & framedLength, (BYTE *) packet, sizeof(packets));
 //
-//        const char * newTestData = "st\0ring Literal";
+//        //----------------------------- recent-edit --//
 //
-//        //const char *newTestData = ( const char * )pFramedData;
-//
-//// them learnings below
-//        const char * charBuffer = ( const char * ) pFramedData;
-//
-//        const char *buffer = "\0ABCD\0hello";
-//        const char *s = buffer;
-//        int n = framedLength;
-//
-//        while (n--)
-//            printf("%c ", putchar(*charBuffer++));
-//        printf ("\n");
-//
+//        char * literal = new char[framedLength*3];
+//        int literalLength = 0;
 //        for (int i = 0; i < framedLength; i++)
-//            printf("%d ", charBuffer[i]);
+//            literalLength += sprintf(literal + literalLength, "%d ", pFramedData[i]);
 //
-//        printf ("\n");
-
-
-    }
+////        printf ("%s\n", literal);
+//
+//        __android_log_print(ANDROID_LOG_DEBUG, "FRAMEDDATA_TAG", "\n hi i packet with info: %s \n", literal);
+//
+////
+////        const char * newTestData = "st\0ring Literal";
+////
+////        //const char *newTestData = ( const char * )pFramedData;
+////
+////// them learnings below
+////        const char * charBuffer = ( const char * ) pFramedData;
+////
+////        const char *buffer = "\0ABCD\0hello";
+////        const char *s = buffer;
+////        int n = framedLength;
+////
+////        while (n--)
+////            printf("%c ", putchar(*charBuffer++));
+////        printf ("\n");
+////
+////        for (int i = 0; i < framedLength; i++)
+////            printf("%d ", charBuffer[i]);
+////
+////        printf ("\n");
+//
+//
+//    }
 
     //-----------------------------Java node edit end----------------------------------------
 }
@@ -1318,6 +1327,7 @@ char const * testget(void)
     if (NULL != pReceivedMessage)
     {
         printf ("Got device 0 message: %s\n", pReceivedMessage->pMessageBody);
+        __android_log_print(ANDROID_LOG_DEBUG, "TESTGET_TAG", "\n testget success with data: %s \n", pReceivedMessage->pMessageBody);
         // free(pReceivedMessage->pMessageBody);
         free(pReceivedMessage);
         return ( ( char const * ) pReceivedMessage->pMessageBody);
