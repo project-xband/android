@@ -27,7 +27,7 @@ import java.util.Set;
 public class MainActivity extends ReactActivity {
 
     static {
-        System.loadLibrary("hello-jni");
+        System.loadLibrary("protocol");
     }
     public native String stringFromJNI();
 //    public native String unimplementedStringFromJNI();
