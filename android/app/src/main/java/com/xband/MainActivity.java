@@ -29,7 +29,10 @@ public class MainActivity extends ReactActivity {
     static {
         System.loadLibrary("protocol");
     }
-    public native String stringFromJNI();
+    public native String testInitSetup();
+    public native String testByteArray();
+    public native String testSendMessage(String rawData);
+    public native String testGetMessage();
 //    public native String unimplementedStringFromJNI();
 
     private static ReactInstanceManager sReactInstanceManager = null;
@@ -148,7 +151,9 @@ public class MainActivity extends ReactActivity {
 
         super.onCreate(savedInstanceState);
         mHandler = new MyHandler(this);
-        Log.e("fresh", stringFromJNI());
+        testInitSetup();
+        testSendMessage("here i am a beautiful message");
+        testGetMessage();
         if (usbService != null) {
 //            display.append(data);
 //            usbService.write(data.getBytes());
