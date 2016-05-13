@@ -88,7 +88,7 @@ android {
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
-            moduleName = 'hello-jni'
+            moduleName = 'protocol'
             stl "stlport_static"
             ldLibs "log"
         }
