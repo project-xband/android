@@ -13,8 +13,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/timeb.h>
-
 
 #define DEVICE_DEBUG
 
@@ -33,7 +31,10 @@
 #include "device.hpp"
 #include "interface.hpp"
 #include "test.hpp"
+#include "timeb.h"
+#include <android/log.h>
 
+#define nullptr NULL
 
 //----------------------------------------------------------------------------------
 // protocol.cpp function prototypes
@@ -79,7 +80,7 @@ void receivePacket (void);
 void removeFirstPacketFromQueue (void);
 
 void framePacket (BYTE * * ppFramedPacketData, WORD * pFramedPacketLength, BYTE * pPacketData, BYTE packetLength);
-void extractPacket (BYTE * * ppPacketData, BYTE * pPacketLength, BYTE * pFramedPacketData, WORD framePacketLength);
+void extractPacket (BYTE * * ppPacketData, BYTE * pPacketLength, BYTE * pFramedPacketData, WORD framePacketLength, WORD * pConsumedLength);
 
 void CreateDeviceID (DEVICE_ID * newDeviceID, DWORD value);
 BYTE CompareDeviceID (DEVICE_ID aDeviceID, DEVICE_ID bDeviceID);

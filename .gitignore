@@ -5,6 +5,10 @@
 *.so
 *.o.d
 
+*.o
+*.so
+*.o.d
+
 # Xcode
 #
 build/

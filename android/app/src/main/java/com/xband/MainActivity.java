@@ -151,9 +151,9 @@ public class MainActivity extends ReactActivity {
 
         super.onCreate(savedInstanceState);
         mHandler = new MyHandler(this);
-        testInitSetup();
-        testSendMessage("here i am a beautiful message");
-        testGetMessage();
+        Log.d("one",testInitSetup());
+        Log.d("two",testSendMessage("here i am a beautiful message"));
+        Log.d("three",testGetMessage());
         if (usbService != null) {
 //            display.append(data);
 //            usbService.write(data.getBytes());

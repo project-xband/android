@@ -175,11 +175,11 @@ void framePacket (BYTE * * ppFramedData, WORD * pFramedLength, BYTE * pPacketDat
                 break;
             case '{':
                 *pFramedData++ = '%';
-                *pFramedData++ = '{';
+                *pFramedData++ = '[';
                 break;
             case '}':
                 *pFramedData++ = '%';
-                *pFramedData++ = '}';
+                *pFramedData++ = ']';
                 break;
             default:
                 *pFramedData++ = *pData;
@@ -191,7 +191,7 @@ void framePacket (BYTE * * ppFramedData, WORD * pFramedLength, BYTE * pPacketDat
     *pFramedLength = calculatedLength;
 }
 
-void extractPacket (BYTE * * ppPacketData, BYTE * pPacketLength, BYTE * pFramedPacketData, WORD framePacketLength)
+void extractPacket (BYTE * * ppPacketData, BYTE * pPacketLength, BYTE * pFramedPacketData, WORD framePacketLength, WORD * pConsumedLength)
 {
     WORD index;
     BYTE * pFramedData;
@@ -202,12 +202,11 @@ void extractPacket (BYTE * * ppPacketData, BYTE * pPacketLength, BYTE * pFramedP
     *ppPacketData = NULL;
     
     pEndOfFramedData = pFramedPacketData + framePacketLength;
-    
-    if ('{' == *pFramedPacketData)
+    pFramedData = pFramedPacketData;
+
+    if ('{' == *pFramedData)
     {
-        pFramedPacketData++;
-    
-        pFramedData = pFramedPacketData;
+        pFramedData++;
 
         for ( ; pFramedData < pEndOfFramedData; pFramedData++)
         {
@@ -218,7 +217,10 @@ void extractPacket (BYTE * * ppPacketData, BYTE * pPacketLength, BYTE * pFramedP
             else
             {
                 if ('}' == *pFramedData)
+                {
+                    *pConsumedLength = (pFramedData - pFramedPacketData) - 1; // calculate how many bytes we consumed
                     goto FoundClosingFrame;
+                }
             }
             calculatedLength++;
         }
@@ -232,16 +234,32 @@ FoundClosingFrame:
         pUnframedData = (BYTE *) malloc (calculatedLength + 2);
         *ppPacketData = pUnframedData;
         *pPacketLength = calculatedLength;
-        
-        pFramedData   = pFramedPacketData;  // start after opening brace, advanced above
+
+        pFramedData   = pFramedPacketData + 1;  // start after opening brace
     
         for (index = 0; index < calculatedLength; index++)
             {
                 if ('%' == *pFramedData)
                 {
                     pFramedData++;
+                    switch (*pFramedData)
+                    {
+                        case '[':
+                            *pUnframedData++ = '{';
+                            break;
+                        case ']':
+                            *pUnframedData++ = '}';
+                            break;
+                        default:
+                            *pUnframedData++ = *pFramedData;
+                            break;
+                    }
+                    pFramedData++;
                 }
-                *pUnframedData++ = *pFramedData++;
+                else
+                {
+                    *pUnframedData++ = *pFramedData++;
+                }
             }
     }
     

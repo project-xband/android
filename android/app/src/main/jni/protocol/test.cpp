@@ -7,7 +7,6 @@
 //  Copyright © 2016 Shannon T Bailey. All rights reserved.
 //
 
-//#include <emscripten/bind.h>
 #include "common.hpp"
 
 extern DEVICE_ID nullDeviceID;
@@ -23,8 +22,8 @@ void testEncoders (void);
 void test (void)
 {
     testInit();
-    
-//    testEncoders ();
+
+    testEncoders ();
     
     testRun();
 }
@@ -37,6 +36,7 @@ void testEncoders (void)
     WORD   framedPacketLength;
 
     //BYTE pMessage[] = "abcdefghijklmnopqrst%%uvwxyz012345%{6789ABCDEFGHIJKLMNOPQRSTUVWXYZ-_-zyxwvutsrqponmlkjihgfedcba987654%}3210ZYXWVUTSRQPONMLKJIHGFEDCBA!";
+
     BYTE pMessage[] = "ab%%cd%{efg%}hi!";
     BYTE messageLength = strlen((const char *)pMessage);
 
@@ -48,11 +48,23 @@ void testEncoders (void)
 
     BYTE * pPacketData;
     BYTE   packetLength;
-    extractPacket (& pPacketData, & packetLength, pFramedPacketData, framedPacketLength);
+    WORD   consumedBytes;
+    
+    extractPacket (& pPacketData, & packetLength, pFramedPacketData, framedPacketLength, & consumedBytes);
 
     *(pPacketData + packetLength) = 0;     // hack in null on binary byte datat that could have zero byte in it...  arg
 
     printf ("Packet Data =[%s]\n", pPacketData);
+
+    WORD length;
+    WORD consumed;
+    BYTE pMessagePlus[] = "{ab%%cd%{efg%}hi!}{foooooffff";
+    length = strlen ((const char *)pMessagePlus);
+    extractPacket (& pPacketData, & packetLength, pMessagePlus, length, & consumed);
+
+    *(pPacketData + packetLength) = 0;     // hack in null on binary byte datat that could have zero byte in it...  arg
+
+    printf ("Packet Data =[%s]  consumed bytes = %d\n", pPacketData, consumed);
 
 }
 
@@ -60,6 +72,7 @@ void testEncoders (void)
 void testInit (void)
 {
     protocolInitialize ();
+    __android_log_print(ANDROID_LOG_DEBUG, "TESTINIT", "The value of 1 + 1 is blank blank blank");
     sManagerInit ();
     
     pTestData = (sTest *) malloc (sizeof(sTest));
@@ -107,8 +120,8 @@ void testRun (void)
             
             if ((userTestTime + 2) < GetMilliCount())
             {
-                BYTE pMessage[] = "abUTSRQPONMLKJIHGFEDCBA!";
-                BYTE pMessage2[] = "Now is the time for all good Make School students to program on the xBAND";
+                BYTE pMessage[] = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-_-zyxwvutsrqponmlkjihgfedcba9876543210ZYXWVUTSRQPONMLKJIHGFEDCBA!";
+                BYTE pMessage2[] = "Now is the time for all good Make School students to program on the xBAND project until the entire world uses XBAND for all their needs";
                 BYTE pMessage3[] = "Now to sent from the access point to a client";
                 
                 printf ("Test time => %d\n", userTestTime);
@@ -177,7 +190,3 @@ void testStepSimulation (void)
     }
 }
 
-//EMSCRIPTEN_BINDINGS(my_module) {
-//    emscripten::function("test", &test);
-//}
-//
