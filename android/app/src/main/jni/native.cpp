@@ -1,8 +1,6 @@
 #include "native.hpp"
 
 #include <jni.h>
-#include "protocol/common.hpp"
-#include "protocol/timeb.h"
 
 extern "C" {
 JNIEXPORT jstring JNICALL

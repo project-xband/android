@@ -32,7 +32,6 @@ void test (void);
 
 void testInit (void);
 void testRun (void);
-void testSend (void);
 
 void testStepSimulation (void);
 
