@@ -15,9 +15,10 @@ const ChatCell = ({
 }) =>
 	<View>
 		<View style={styles.cell}>
+			{console.log('lastMessage', lastMessage)}
 			<View style={styles.image}>
 				<Text style={styles.initial}>
-					{((lastMessage.from === "undefined") ? lastMessage.from.charAt(0) : "X") /* <- this bitch is sometimes undefined.. maybe it's the numberes?*/}
+					{ ('' + lastMessage.from).charAt(0) }
 				</Text>
 			</View>
 			<View style={{ flexDirection: 'column', padding: 10 }}>

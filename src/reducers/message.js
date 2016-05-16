@@ -30,8 +30,8 @@ const initialState = {
 
 const actionsMap = {
 	addMessage(state=initialState, action) {
-		console.log('addMessage action --> ', action)
-		console.log('addMessage state  --> ', state)
+		// console.log('addMessage action --> ', action)
+		// console.log('addMessage state  --> ', state)
 		return {
 			...state, 
 			[action.id]: {

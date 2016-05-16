@@ -17,12 +17,13 @@ export default class Chat extends Component {
 
 	static propTypes = {
 		addMessage: PropTypes.func.isRequired,
+		addMessageKeyToTheConversation: PropTypes.func.isRequired,
 		conversation: PropTypes.object.isRequired,
-		conversationId: PropTypes.string.isRequired
+		conversationKey: PropTypes.string.isRequired
 	}
 
 	// let's load in some bubbles
-	constructor(props) {
+	constructor(props) {	
 		super(props)
 
 		console.log('chat',this.props);
@@ -30,13 +31,13 @@ export default class Chat extends Component {
 
 	render() {
 		return(
-			<View>
-				<ScrollView>
+			<View style={{ marginTop: 64 }}>
+				<ScrollView style={{}}>
 					{
-						_.map(this.props.messages, (message) => {
+						_.map(this.props.conversation[this.props.conversationKey].messages, (msgId) => {
 							return <Bubble 	key={_.uniqueId()}
-											text={message.body}
-										   	position={message.position}/>
+											text={this.props.messages[msgId].body}
+										   	position={this.props.messages[msgId].position}/>
 						})
 					}
 				</ScrollView>

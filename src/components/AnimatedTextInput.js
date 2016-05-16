@@ -24,10 +24,12 @@ export default class AnimatedTextInput extends Component {
 	constructor(props) {
 		super(props)
 
-		console.log('textinput', this.props)
+		// console.log('textinput', this.props)
 
 		this.state = {
-			text: ''
+			text: '',
+			buttonState: true,
+			colorStyle: styles.gray
 		};
 	}
 
@@ -37,9 +39,15 @@ export default class AnimatedTextInput extends Component {
 				<TextInput
 					style={styles.txtInput}
 					defaultValue={ this.state.text }
-					onChangeText={ (text) => this.state = { text: text } /*TODO: send an action and store draft for each conversation*/}
-				/>
+					onChangeText={ (text) => {
+						this.setState({
+							text: text,
+						})
+						this.switchButton()
+					}
+				}/>
 				<TouchableHighlight
+					disabled={this.state.buttonState}
 					underlayColor='transparent'
 					style={styles.sendButton}
 					onPress={ () => {
@@ -57,14 +65,28 @@ export default class AnimatedTextInput extends Component {
 							}
 						});
 
-						this.setState({ text: '' });
+						this.setState({ text: '' })
 					}}>
-					<Text style={styles.sendButtonText}>
+					<Text style={ [styles.sendButtonText, this.state.colorStyle] }>
 						{'Send'}
 					</Text>
 				</TouchableHighlight>
 			</View>
 		)
+	}
+
+	switchButton() {
+		if (this.state.text != '') {
+			this.setState({ 
+				colorStyle: styles.blue,
+				buttonState: false
+			})
+		} else {
+			this.setState({ 
+				colorStyle: styles.gray,
+				buttonState: true
+			})
+		}
 	}
 }
 
@@ -94,8 +116,13 @@ const styles = StyleSheet.create({
 	sendButtonText: {
 		fontSize: 19,
 		textAlign: 'center',
-		color: '#536DFE',
 		fontWeight: 'bold'
+	},
+	gray: {
+		color: 'darkgray',
+	},
+	blue: {
+		color: '#536DFE',
 	}
 });
 

@@ -13,8 +13,8 @@ const initialState = {
 
 const actionsMap = {
 	addMessage(state, action) {
-		console.log('conversation action -->',action);
-		console.log('conversation state  -->',state);
+		// console.log('conversation action -->',action);
+		// console.log('conversation state  -->',state);
 		return {
 			// here I need to add the message to the conversation
 			// action.conversation[]\
@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
 
 	// map the "action.type" to an action within the "actionsMap" and create reduceFn
 	const reduceFn = actionsMap[action.type];
- 	console.log('conversation reducer', state)
+ 	// console.log('conversation reducer', state)
 	// return the original state if "action.type" doesn't map to any action
 	if (!reduceFn) return state;	
 
