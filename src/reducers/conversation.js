@@ -12,7 +12,7 @@ const initialState = {
 }
 
 const actionsMap = {
-	addMessage(state, action) {
+	addMessageKeyToTheConversation(state, action) {
 		// console.log('conversation action -->',action);
 		// console.log('conversation state  -->',state);
 		return {
