@@ -1,20 +1,41 @@
 import React, { Component, PropTypes } from 'react-native'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { Router } from 'react-native-router-flux';
 
-import Chat from '../components/Chat';
-import * as MessageActions from '../actions/message';
+/*
+  ^ there is a new format they said (new RN 0.25.1) 
+  where the import is like -->
 
-const RouterWithRedux = connect()(Router);
+  ````
+    import React, { Component } from 'react'
+    import { 
+      PropTypes,
+      StyleSheet,
+      Dimensions,
+      Text,
+      TextInput,
+      View,
+      TouchableHighlight
+    } from 'react-native'
+  ````
+
+  (https://github.com/facebook/react-native/releases/tag/v0.25.1)
+*/
+
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { Router } from 'react-native-router-flux'
+
+import Chat from '../components/Chat'
+import * as MessageActions from '../actions/message'
+
+const RouterWithRedux = connect()(Router)
 
 const mapStateToProps = state => {
    return {
       messages: state.message,
       conversation: state.conversation
-   };
-};
-const mapDispatchToProps = dispatch => bindActionCreators(MessageActions, dispatch);
+   }
+}
+const mapDispatchToProps = dispatch => bindActionCreators(MessageActions, dispatch)
 
 class App extends Component {
 	render() {
@@ -24,4 +45,4 @@ class App extends Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)

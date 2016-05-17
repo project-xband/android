@@ -1,8 +1,9 @@
 export function addMessageKeyToTheConversation(payload) {
-	console.log('addMessageKeyToTheConversation --> ', payload);
+	console.log('addMessageKeyToTheConversation --> ', payload)
 
 	return {
 		type: 'addMessageKeyToTheConversation',
-		conversationId: payload.conversationId
+		conversationKey: payload.conversationKey,
+		messageKey: payload.uniqueKey
 	};
 }

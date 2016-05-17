@@ -1,4 +1,5 @@
-'use strict';
+// 'use strict'
 
-import { NativeModules } from 'react-native';
-module.exports = NativeModules.SendModuleAndroid;
+import { NativeModules } from 'react-native'
+// module.exports = NativeModules.SendModuleAndroid
+export default NativeModules.SendModuleAndroid

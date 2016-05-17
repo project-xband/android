@@ -1,14 +1,17 @@
-import _ from 'lodash';
-// import Immutable from 'immutable';
+import _ from 'lodash'
 
 const initialState = {
-    '44.111.2': {
-      name: 'fero'
-    },
-    '44.3.21': {
-      name: 'kevin'
-    }
+  '44.111.2': {
+    name: 'fero'
+  },
+  '44.3.21': {
+    name: 'kevin'
+  }
 }
+/*
+  ^ TODO:
+  get rid of this altogether in production coode
+*/
 
 const actionsMap = {
 }

@@ -7,18 +7,44 @@ import React, {
   TextInput,
   View,
   TouchableHighlight
-} from 'react-native';
-// import Button from 'react-native-button';
+} from 'react-native'
 
+/*
+	^ there is a new format they said (new RN 0.25.1) 
+	where the import is like -->
+
+	````
+		import React, { Component } from 'react'
+		import { 
+			PropTypes,
+			StyleSheet,
+			Dimensions,
+			Text,
+			TextInput,
+			View,
+			TouchableHighlight
+		} from 'react-native'
+	````
+
+	(https://github.com/facebook/react-native/releases/tag/v0.25.1)
+*/
+
+import UUID from 'uuid-js'
 import { Actions } from 'react-native-router-flux'
 
-// how to animate the send button? what props do I pass down?
 export default class AnimatedTextInput extends Component {
 
 	static propTypes = {
-		// text: PropTypes.string.isRequired,
+		/* text: PropTypes.string.isRequired,
+
+			^ TODO:
+			if the user has unfinished message, 
+			a draft, pass it down here and initialise
+			the state with that prop
+		*/
 		addMessage: PropTypes.func.isRequired,
-		conversation: PropTypes.object.isRequired
+		conversation: PropTypes.object.isRequired,
+		addMessageKeyToTheConversation: PropTypes.func.isRequired
 	}
 
 	constructor(props) {
@@ -30,7 +56,7 @@ export default class AnimatedTextInput extends Component {
 			text: '',
 			buttonState: true,
 			colorStyle: styles.gray
-		};
+		}
 	}
 
 	render() {
@@ -53,17 +79,26 @@ export default class AnimatedTextInput extends Component {
 					onPress={ () => {
 
 						this.props.addMessage({
-							message: {
-								from: '44.00.9.15',
-								body: this.state.text,
-								position: 'right',
-								timestamp: 'now_or_never'
-							},
-							conversation: {
-								...this.props.conversation
-								// ^^^^ to edit the conversation so I can add the msg
-							}
+							from: '44.00.9.15', 
+							/*
+								^ TODO: 
+								get the global address instead?
+							*/
+							body: this.state.text,
+							position: 'right', 
+							// ^ this will aways be so when sending <3
+							timestamp: 'now_or_never' 
+							/* 
+								^ TODO: 
+								generate the timestamp based
+								on shannons packet timestamp 
+								time formatting
+							*/
 						});
+
+						this.props.addMessageKeyToTheConversation({
+
+						})
 
 						this.setState({ text: '' })
 					}}>
@@ -87,6 +122,10 @@ export default class AnimatedTextInput extends Component {
 				buttonState: true
 			})
 		}
+	}
+
+	generateUniqueKey() {
+		return UUID.create().toString()
 	}
 }
 
@@ -124,6 +163,6 @@ const styles = StyleSheet.create({
 	blue: {
 		color: '#536DFE',
 	}
-});
+})
 
 export default AnimatedTextInput
