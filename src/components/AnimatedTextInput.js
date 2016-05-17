@@ -10,12 +10,12 @@ import React, {
 } from 'react-native'
 
 /*
-	^ there is a new format they said (new RN 0.25.1) 
+	^ there is a new format they said (new RN 0.25.1)
 	where the import is like -->
 
 	````
 		import React, { Component } from 'react'
-		import { 
+		import {
 			PropTypes,
 			StyleSheet,
 			Dimensions,
@@ -38,12 +38,12 @@ export default class AnimatedTextInput extends Component {
 		/* text: PropTypes.string.isRequired,
 
 			^ TODO:
-			if the user has unfinished message, 
+			if the user has unfinished message,
 			a draft, pass it down here and initialise
 			the state with that prop
 		*/
 		addMessage: PropTypes.func.isRequired,
-		conversation: PropTypes.object.isRequired,
+		conversationKey: PropTypes.string.isRequired,
 		addMessageKeyToTheConversation: PropTypes.func.isRequired
 	}
 
@@ -78,26 +78,31 @@ export default class AnimatedTextInput extends Component {
 					style={styles.sendButton}
 					onPress={ () => {
 
+						const msgkey = this.generateUniqueKey()
+
 						this.props.addMessage({
-							from: '44.00.9.15', 
+							uniqueKey: msgkey,
+							from: '44.00.9.15',
 							/*
-								^ TODO: 
+								^ TODO:
 								get the global address instead?
 							*/
 							body: this.state.text,
-							position: 'right', 
+							position: 'right',
 							// ^ this will aways be so when sending <3
-							timestamp: 'now_or_never' 
-							/* 
-								^ TODO: 
+							timestamp: 'now_or_never'
+
+							/*
+								^ TODO:
 								generate the timestamp based
-								on shannons packet timestamp 
+								on shannons packet timestamp
 								time formatting
 							*/
 						});
 
 						this.props.addMessageKeyToTheConversation({
-
+							uniqueKey: msgkey,
+							conversationKey: this.props.conversationKey
 						})
 
 						this.setState({ text: '' })
@@ -112,12 +117,12 @@ export default class AnimatedTextInput extends Component {
 
 	switchButton() {
 		if (this.state.text != '') {
-			this.setState({ 
+			this.setState({
 				colorStyle: styles.blue,
 				buttonState: false
 			})
 		} else {
-			this.setState({ 
+			this.setState({
 				colorStyle: styles.gray,
 				buttonState: true
 			})

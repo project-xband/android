@@ -9,12 +9,12 @@ import React, {
 } from 'react-native'
 
 /*
-	^ there is a new format they said (new RN 0.25.1) 
+	^ there is a new format they said (new RN 0.25.1)
 	where the import is like -->
 
 	````
 		import React, { Component } from 'react'
-		import { 
+		import {
 			PropTypes,
 			StyleSheet,
 			Dimensions,
@@ -43,7 +43,7 @@ export default class Chat extends Component {
 	}
 
 	// let's load in some bubbles
-	constructor(props) {	
+	constructor(props) {
 		super(props)
 
 		console.log('chat',this.props)
@@ -67,7 +67,7 @@ export default class Chat extends Component {
 				<AnimatedTextInput
 					addMessage = { this.props.addMessage }
 					addMessageKeyToTheConversation = { this.props.addMessageKeyToTheConversation }
-					conversation = { this.props.conversation }/>
+					conversationKey = { this.props.conversationKey }/>
 			</View>
 		)
 	}

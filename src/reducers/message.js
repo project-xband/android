@@ -36,7 +36,7 @@ const actionsMap = {
 		// console.log('addMessage action --> ', action)
 		// console.log('addMessage state  --> ', state)
 		return {
-			...state, 
+			...state,
 			[message.uniqueKey]: {
 				from: message.from,
 				position: message.position,

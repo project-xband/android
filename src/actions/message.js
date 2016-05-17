@@ -1,4 +1,4 @@
-export function addMessage(payload) {
+export function addMessage(message) {
 	console.log('msg action --> ', message)
 
 	return {
@@ -8,5 +8,5 @@ export function addMessage(payload) {
 		body: message.body,
 		position: message.position,
 		timestamp: message.timestamp
-	};
+	}
 }

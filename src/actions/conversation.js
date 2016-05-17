@@ -5,5 +5,5 @@ export function addMessageKeyToTheConversation(payload) {
 		type: 'addMessageKeyToTheConversation',
 		conversationKey: payload.conversationKey,
 		messageKey: payload.uniqueKey
-	};
+	}
 }
