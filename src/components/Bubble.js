@@ -7,12 +7,12 @@ import React, {
 } from 'react-native'
 
 /*
-  ^ there is a new format they said (new RN 0.25.1) 
+  ^ there is a new format they said (new RN 0.25.1)
   where the import is like -->
 
   ````
     import React, { Component } from 'react'
-    import { 
+    import {
       PropTypes,
       StyleSheet,
       Dimensions,
@@ -20,7 +20,7 @@ import React, {
       TextInput,
       View,
       TouchableHighlight
-    } from 'react-native'
+    } from 'react-native's
   ````
 
   (https://github.com/facebook/react-native/releases/tag/v0.25.1)
@@ -30,7 +30,7 @@ const Bubble = ({
 	text,
 	position,
 }) =>
-	<View 
+	<View
     style = {[
         styles.bubble,
         (position === 'left' ? styles.bubbleLeft : styles.bubbleRight),
@@ -47,6 +47,10 @@ const Bubble = ({
 
 Bubble.propTypes = {
 	text: React.PropTypes.string.isRequired,
+  /*
+     ^ TODO:
+     later pass the 'draft' object for unfinished messages
+  */
 	position: React.PropTypes.oneOf(['left', 'right'])
 }
 
@@ -57,7 +61,7 @@ Bubble.defaultProps = {
 }
 
 const styles = StyleSheet.create({
-	flexy: { 
+	flexy: {
 		// flex: 1 // not using flex now, now sure what's the issue...
 	},
 	bubble: {

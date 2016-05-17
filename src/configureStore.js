@@ -52,7 +52,7 @@ export default function configureStore(initialState={}) {
 
   load(store)
     .then((loadedState) => {
-      // console.log('Loaded state! ->', loadedState)    
+      // console.log('Loaded state! ->', loadedState)
       store.dispatch({
         type: 'IS_LOADED'
       })

@@ -30,7 +30,8 @@ const xBand = () => (
 					"[friend name]"
 				 	/*
 				 		^ TODO:
-				 		set from the message.from
+				 		set the title string from the
+				 		message.from, not sure how yet :(
 				 	*/
 				 }/>
 			</Scene>

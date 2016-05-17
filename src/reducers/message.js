@@ -1,29 +1,27 @@
-import UUID from 'uuid-js'
-
 const initialState = {
   [0]: {
     from: '44.111.2',   // <-- to find who is in conversation look at the 'from',
     position: 'right',  // <-- always 'right' on sent
     body: "Hey babe, how's xBand",
-    timestamp: 'whenever'
+    timestamp: 'Mon'
   },
   [1]: {
     from: '44.3.21',
     position: 'left',   // <-- always 'left' on received
     body: 'Hey, how are you doing habibi?',
-    timestamp: 'whenever'
+    timestamp: 'Mon'
   },
   ['h4rdc0d3dm3ss4ge']: {
     from: '44.3.21',
     position: 'left',
     body: "xBand is the coolest",
-    timestamp: 'whenever'
+    timestamp: 'Mon'
   },
   ['h4rdc0d3dm3ss4ge']: {
     from: '44.3.21',
     position: 'left',
     body: "xBand is swank",
-    timestamp: 'whenever'
+    timestamp: 'Mon'
   }
 }
 /*

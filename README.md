@@ -1,4 +1,4 @@
-# "Project xBand" Android client 
+# "Project xBand" Android client
 [![Build Status](https://travis-ci.org/jhen0409/react-native-boilerplate.svg)](https://travis-ci.org/jhen0409/react-native-boilerplate) [![Dependency Status](https://david-dm.org/jhen0409/react-native-boilerplate.svg)](https://david-dm.org/jhen0409/react-native-boilerplate) [![devDependency Status](https://david-dm.org/jhen0409/react-native-boilerplate/dev-status.svg)](https://david-dm.org/jhen0409/react-native-boilerplate#info=devDependencies)
 
 ## Installation
@@ -22,6 +22,29 @@ $ npm run android
 ```
 
 __*[Emulator only]*__ If you're still use Android 4.0, it will cannot use `adb reverse`, you should use `10.0.2.2` (Genymotion: `10.0.3.2`) instead of `localhost` in [configureStore.js](src/configureStore.js#L15).
+
+## Contribute
+
+If you want to contribute, skimm the source, look for the "TODO"s and submit a pull request
+
+We are plan on adding
+ - Analitics (some redux middleware?) [ ]
+ - Immutable.js (datomic <3) [ ]
+ - VOIP [ ]
+ - seach messages [ ]
+ - send voice messages [ ]
+ - contacts [ ]
+ - send new message through material button [ ]
+ - edit your profile - profile view [ ]
+ - deleting, editing and flagging content in the app (messages, conversations, etc) [ ]
+ - fixing all the todos in code [ ]
+ - establish consistent linting (ESLint) [ ]
+ - focus on performance of the app - eliminate uneccesairy libs [ ]
+ - add security, encryption [ ]
+ - make use redux remote dev tools [ ]
+ - make a secrets file with the address of user, configs maybe,
+   things that are good to have globaly but too important -> need to be secured
+
 
 ## Test
 

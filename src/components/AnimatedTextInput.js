@@ -9,6 +9,8 @@ import React, {
   TouchableHighlight
 } from 'react-native'
 
+import SendModuleAndroid from './SendModuleAndroid'
+
 /*
 	^ there is a new format they said (new RN 0.25.1)
 	where the import is like -->
@@ -61,22 +63,22 @@ export default class AnimatedTextInput extends Component {
 
 	render() {
 		return(
-			<View style={styles.txtInputContainer}>
+			<View style = { styles.txtInputContainer }>
 				<TextInput
-					style={styles.txtInput}
+					style = { styles.txtInput }
 					defaultValue={ this.state.text }
 					onChangeText={ (text) => {
 						this.setState({
-							text: text,
+							text: text
 						})
 						this.switchButton()
 					}
 				}/>
 				<TouchableHighlight
-					disabled={this.state.buttonState}
-					underlayColor='transparent'
-					style={styles.sendButton}
-					onPress={ () => {
+					disabled = { this.state.buttonState }
+					underlayColor = 'transparent'
+					style = { styles.sendButton }
+					onPress = { () => {
 
 						const msgkey = this.generateUniqueKey()
 
@@ -90,7 +92,7 @@ export default class AnimatedTextInput extends Component {
 							body: this.state.text,
 							position: 'right',
 							// ^ this will aways be so when sending <3
-							timestamp: 'now_or_never'
+							timestamp: 'Mon'
 
 							/*
 								^ TODO:
@@ -98,7 +100,11 @@ export default class AnimatedTextInput extends Component {
 								on shannons packet timestamp
 								time formatting
 							*/
-						});
+						})
+
+						SendModuleAndroid.send({
+							// send the packet format through here
+						})
 
 						this.props.addMessageKeyToTheConversation({
 							uniqueKey: msgkey,
@@ -107,7 +113,7 @@ export default class AnimatedTextInput extends Component {
 
 						this.setState({ text: '' })
 					}}>
-					<Text style={ [styles.sendButtonText, this.state.colorStyle] }>
+					<Text style = { [styles.sendButtonText, this.state.colorStyle] }>
 						{'Send'}
 					</Text>
 				</TouchableHighlight>

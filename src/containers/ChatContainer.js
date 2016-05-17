@@ -4,12 +4,12 @@ import React, {
 } from 'react-native'
 
 /*
-  ^ there is a new format they said (new RN 0.25.1) 
+  ^ there is a new format they said (new RN 0.25.1)
   where the import is like -->
 
   ````
     import React, { Component } from 'react'
-    import { 
+    import {
       PropTypes,
       StyleSheet,
       Dimensions,

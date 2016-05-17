@@ -30,19 +30,10 @@ const actionsMap = {
     newMessageKeyArr = newState[action.conversationKey].messages.slice()
     newMessageKeyArr.push(action.messageKey)
 
+    // swap the arrays <3
     newState[action.conversationKey].messages = newMessageKeyArr
 
-		return {
-			/*
-				here I need to add the message key to the conversation
-
-				task - research nested updating of redux store save
-
-			*/
-			// action.conversation[]
-
-      ...newState
-		}
+		return { ...newState }
 	}
 }
 
