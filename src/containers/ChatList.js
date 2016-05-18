@@ -71,6 +71,9 @@ class ChatList extends Component {
 			<ScrollView style = {{ marginTop: 60 }}>
 				{
 					_.map(this.lastMessage(), (keys) => {
+
+            console.log('keys biach',keys)
+
 						const conversationKey = keys.conversationKey
 						const message = this.props.messages[keys.messageKey]
 

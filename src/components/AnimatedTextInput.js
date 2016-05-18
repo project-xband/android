@@ -102,11 +102,11 @@ export default class AnimatedTextInput extends Component {
 							*/
 						})
 
-						SendModuleAndroid.send({
-              'from':"123",
-              'to':"234",
-              'msg':this.state.text
-						})
+						// SendModuleAndroid.send({
+      //         'from':"123",
+      //         'to':"234",
+      //         'msg':this.state.text
+						// })
 
 						this.props.addMessageKeyToTheConversation({
 							uniqueKey: msgkey,
