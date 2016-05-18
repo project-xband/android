@@ -1,28 +1,46 @@
-import React, { Component, PropTypes } from 'react-native'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, {
+	Component,
+	PropTypes
+} from 'react-native'
 
-import Bubble from '../components/Bubble';
-import Chat from '../components/Chat';
-import ChatCell from '../components/ChatCell';
-import AnimatedTextInput from '../components/AnimatedTextInput';
+/*
+  ^ there is a new format they said (new RN 0.25.1)
+  where the import is like -->
 
-import * as MessageActions from '../actions/message';
+  ````
+    import React, { Component } from 'react'
+    import {
+      PropTypes,
+      StyleSheet,
+      Dimensions,
+      Text,
+      TextInput,
+      View,
+      TouchableHighlight
+    } from 'react-native'
+  ````
 
-const mapStateToProps = state => {
-   return {
-      messages: state.message,
-      conversation: state.conversation
-   };
-};
+  (https://github.com/facebook/react-native/releases/tag/v0.25.1)
+*/
 
-const mapDispatchToProps = dispatch => bindActionCreators(MessageActions, dispatch);
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 
-class ChatContainer extends Component {
-	render() {
-		console.log('chat cont props',this.props)
-		return <Chat {...this.props}/>
-	}
+import Bubble from '../components/Bubble'
+import Chat from '../components/Chat'
+import ChatCell from '../components/ChatCell'
+import AnimatedTextInput from '../components/AnimatedTextInput'
+
+import * as MessageActions from '../actions/message'
+import * as ConversationActions from '../actions/conversation'
+
+const mapStateToProps = state => ({
+  messages: state.message,
+  conversation: state.conversation
+})
+
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators(Object.assign({}, MessageActions, ConversationActions), dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(Chat)

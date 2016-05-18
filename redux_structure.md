@@ -1,5 +1,3 @@
-redux_structure.md
-
 {
 	contacts: {
 		'44.111.2': {

@@ -5,36 +5,81 @@ import React, {
 	Text,
 	Dimensions,
 	View
-} from 'react-native';
-import Immutable from 'immutable';
+} from 'react-native'
 
-// TODO: optimise the preview of the last message (unneccerairy calls)
+/*
+  ^ there is a new format they said (new RN 0.25.1)
+  where the import is like -->
+
+  ````
+    import React, { Component } from 'react'
+    import {
+      PropTypes,
+      StyleSheet,
+      Dimensions,
+      Text,
+      TextInput,
+      View,
+      TouchableHighlight
+    } from 'react-native'
+  ````
+
+  (https://github.com/facebook/react-native/releases/tag/v0.25.1)
+*/
+
+/*
+	TODO:
+	optimise the preview of the last message
+	(unneccerairly many store calls and checks?)
+*/
 const ChatCell = ({
 	lastMessage,
 	messages
 }) =>
 	<View>
-		<View style={styles.cell}>
-			<View style={styles.image}>
-				<Text style={styles.initial}>
-					{((lastMessage.from === "undefined") ? lastMessage.from.charAt(0) : "X") /* <- this bitch is sometimes undefined.. maybe it's the numberes?*/}
+		<View style = { styles.cell }>
+			{ console.log('lastMessage', lastMessage) }
+			<View style = { styles.image }>
+				<Text style = { styles.initial }>
+					{ ('' + lastMessage.from).charAt(0) }
 				</Text>
 			</View>
-			<View style={{ flexDirection: 'column', padding: 10 }}>
-				<View style={{ flexDirection: 'row', marginTop: 10}}>
-					<Text style={styles.name}>
-						{lastMessage.from}
+			<View style = {{ flexDirection: 'column', padding: 10 }}>
+				<View style = {{ flexDirection: 'row', marginTop: 10 }}>
+					<Text style = { styles.name }>
+						{ lastMessage.from }
 					</Text>
-					<Text style={styles.day}>
-						{lastMessage.timestamp}
+					<Text style = { styles.day }>
+						{ lastMessage.timestamp }
 					</Text>
 				</View>
-				<Text style={styles.msgPreview}>
-					{(!lastMessage.body === "undefined" && lastMessage.body.length > 30) ? lastMessage.body.substring(0, 30) + '...' : lastMessage.body}
+				<Text style = { styles.msgPreview }>
+					{
+						(!lastMessage.body === "undefined" && lastMessage.body.length > 30)
+							? lastMessage.body.substring(0, 30) + '...'
+							: lastMessage.body
+
+						/*
+							^ TODO:
+							Display text in monospaced font so that the
+							message preview text is consistently styled
+							and theres no overflow/bad displaying of the
+							last message
+
+							^ TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+							the last message props are being de-allocated with its component
+							which in return doesn't show any messages on the chatCell
+
+							potential fix - pass the last message as we're going back in
+							the stack - from the Chat to the ChatList
+						 */
+
+					}
 				</Text>
 			</View>
 		</View>
-		<View style={styles.divider}/>
+		<View style = { styles.divider }/>
 	</View>
 
 ChatCell.propTypes = {
@@ -42,18 +87,18 @@ ChatCell.propTypes = {
 }
 
 ChatCell.defaultProps = {
-	...Component.defaultProps,
-	// TODO: move to real messages, replace the dummy data
-	lastMessage: Immutable.Map  ({
-								  from: 'Jakub',
-								  message: 'xBand equalizes opportopportunityopportunityunity!',
-								  time: 'Mon' // Will I get it parsed from Java already? need to display the day in shorthand
-								})
+	...Component.defaultProps
 }
+
+/*
+	TODO:
+	edit the styling so the formatting is consistent with the
+	last message and date and so on, snap to edges, etc...
+ */
 
 const styles = StyleSheet.create({
 	cell: {
-		flexDirection: 'row',
+		flexDirection: 'row'
 	},
 	image: {
 		height: Dimensions.get('window').width / 6,
@@ -64,7 +109,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'flex-start',
 		backgroundColor: '#F5F5F5',
 		justifyContent: 'center',
-		margin: 10,
+		margin: 10
 	},
 	initial: {
 		backgroundColor: 'transparent',
@@ -81,13 +126,14 @@ const styles = StyleSheet.create({
 		flex: 1,
 		color: '#757575',
 		fontSize: 20,
-		textAlign: 'left',
+		textAlign: 'left'
 	},
 	day: {
 		flex: 1,
+		alignSelf: 'flex-end',
 		color: '#9E9E9E',
 		fontSize: 18,
-		textAlign: 'right',
+		textAlign: 'right'
 	},
 	msgPreview: {
 		flex: 1,

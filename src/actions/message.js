@@ -1,12 +1,12 @@
-import UUID from 'uuid-js';
-
-export function addMessage(payload) {
-	console.log('msg action --> ', payload);
+export function addMessage(message) {
+	console.log('msg action --> ', message)
 
 	return {
 		type: 'addMessage',
-		id: UUID.create().toString(),
-		message: payload.message,
-		conversation: payload.conversation
-	};
+		uniqueKey: message.uniqueKey,
+		from: message.from,
+		body: message.body,
+		position: message.position,
+		timestamp: message.timestamp
+	}
 }

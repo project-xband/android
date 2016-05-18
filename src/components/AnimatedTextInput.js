@@ -7,64 +7,136 @@ import React, {
   TextInput,
   View,
   TouchableHighlight
-} from 'react-native';
-// import Button from 'react-native-button';
+} from 'react-native'
 
+import SendModuleAndroid from './SendModuleAndroid'
+
+/*
+	^ there is a new format they said (new RN 0.25.1)
+	where the import is like -->
+
+	````
+		import React, { Component } from 'react'
+		import {
+			PropTypes,
+			StyleSheet,
+			Dimensions,
+			Text,
+			TextInput,
+			View,
+			TouchableHighlight
+		} from 'react-native'
+	````
+
+	(https://github.com/facebook/react-native/releases/tag/v0.25.1)
+*/
+
+import UUID from 'uuid-js'
 import { Actions } from 'react-native-router-flux'
 
-// how to animate the send button? what props do I pass down?
 export default class AnimatedTextInput extends Component {
 
 	static propTypes = {
-		// text: PropTypes.string.isRequired,
+		/* text: PropTypes.string.isRequired,
+
+			^ TODO:
+			if the user has unfinished message,
+			a draft, pass it down here and initialise
+			the state with that prop
+		*/
 		addMessage: PropTypes.func.isRequired,
-		conversation: PropTypes.object.isRequired
+		conversationKey: PropTypes.string.isRequired,
+		addMessageKeyToTheConversation: PropTypes.func.isRequired
 	}
 
 	constructor(props) {
 		super(props)
 
-		console.log('textinput', this.props)
+		// console.log('textinput', this.props)
 
 		this.state = {
-			text: ''
-		};
+			text: '',
+			buttonState: true,
+			colorStyle: styles.gray
+		}
 	}
 
 	render() {
 		return(
-			<View style={styles.txtInputContainer}>
+			<View style = { styles.txtInputContainer }>
 				<TextInput
-					style={styles.txtInput}
+					style = { styles.txtInput }
 					defaultValue={ this.state.text }
-					onChangeText={ (text) => this.state = { text: text } /*TODO: send an action and store draft for each conversation*/}
-				/>
+					onChangeText={ (text) => {
+						this.setState({
+							text: text
+						})
+						this.switchButton()
+					}
+				}/>
 				<TouchableHighlight
-					underlayColor='transparent'
-					style={styles.sendButton}
-					onPress={ () => {
+					disabled = { this.state.buttonState }
+					underlayColor = 'transparent'
+					style = { styles.sendButton }
+					onPress = { () => {
+
+						const msgkey = this.generateUniqueKey()
 
 						this.props.addMessage({
-							message: {
-								from: '44.00.9.15',
-								body: this.state.text,
-								position: 'right',
-								timestamp: 'now_or_never'
-							},
-							conversation: {
-								...this.props.conversation
-								// ^^^^ to edit the conversation so I can add the msg
-							}
-						});
+							uniqueKey: msgkey,
+							from: '44.00.9.15',
+							/*
+								^ TODO:
+								get the global address instead?
+							*/
+							body: this.state.text,
+							position: 'right',
+							// ^ this will aways be so when sending <3
+							timestamp: 'Mon'
 
-						this.setState({ text: '' });
+							/*
+								^ TODO:
+								generate the timestamp based
+								on shannons packet timestamp
+								time formatting
+							*/
+						})
+
+						SendModuleAndroid.send({
+							// send the packet format through here
+						})
+
+						this.props.addMessageKeyToTheConversation({
+							uniqueKey: msgkey,
+							conversationKey: this.props.conversationKey
+						})
+
+						this.setState({ text: '' })
 					}}>
-					<Text style={styles.sendButtonText}>
+					<Text style = { [styles.sendButtonText, this.state.colorStyle] }>
 						{'Send'}
 					</Text>
 				</TouchableHighlight>
 			</View>
 		)
+	}
+
+	switchButton() {
+		if (this.state.text != '') {
+			this.setState({
+				colorStyle: styles.blue,
+				buttonState: false
+			})
+		} else {
+			this.setState({
+				colorStyle: styles.gray,
+				buttonState: true
+			})
+		}
+	}
+
+	generateUniqueKey() {
+		return UUID.create().toString()
 	}
 }
 
@@ -94,9 +166,14 @@ const styles = StyleSheet.create({
 	sendButtonText: {
 		fontSize: 19,
 		textAlign: 'center',
-		color: '#536DFE',
 		fontWeight: 'bold'
+	},
+	gray: {
+		color: 'darkgray',
+	},
+	blue: {
+		color: '#536DFE',
 	}
-});
+})
 
 export default AnimatedTextInput

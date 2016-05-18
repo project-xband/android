@@ -1,21 +1,21 @@
 const initialState = {
-  scene: {},
-};
+  scene: {}
+}
 
 export default function reducer(state = initialState, action = {}) {
-  
+
   switch (action.type) {
     // focus action is dispatched when a new screen comes into focus
-    case "focus":
-    	console.log('aiiii', state);
+    case 'focus':
+    	// console.log('get routed', state)
 		return {
-		...state,
-		scene: action.scene,
-		};
+  		...state,
+  		scene: action.scene
+		}
 
     // ...other actions
 
     default:
-      return state;
+      return state
   }
 }
