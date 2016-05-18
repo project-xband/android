@@ -5,6 +5,7 @@
 *.o
 *.so
 *.o.d
+*.iml
 
 # Xcode
 #

@@ -1,8 +1,16 @@
 package com.xband.usbclient;
 
+import android.util.Log;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableMapKeySetIterator;
+
+import org.json.JSONObject;
+
+import java.util.Iterator;
 
 public class SendModule extends ReactContextBaseJavaModule {
 
@@ -19,11 +27,16 @@ public class SendModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void send(String message) {
+    public void send(ReadableMap message) {
 
+        ReadableMapKeySetIterator it = message.keySetIterator();
+        while (it.hasNextKey()) {
+            String temp = message.getString(it.nextKey());
+            Log.d("sendingpackets",temp);
+        }
         if (UsbService.SERVICE_CONNECTED) {
-            framePacket(message.getBytes(),message.length());
-            UsbService.write(framedData);
+//            framePacket(message.getBytes(),message.length());
+//            UsbService.write(framedData);
         }
     }
 
