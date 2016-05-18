@@ -106,7 +106,6 @@ export default class AnimatedTextInput extends Component {
               'from':"123",
               'to':"234",
               'msg':this.state.text
-							// send the packet format through here
 						})
 
 						this.props.addMessageKeyToTheConversation({

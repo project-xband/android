@@ -32,6 +32,9 @@ const xBand = () => (
 				 		^ TODO:
 				 		set the title string from the
 				 		message.from, not sure how yet :(
+
+				 		^ TODO:
+				 		Add bottom tab bar in here as well
 				 	*/
 				 }/>
 			</Scene>
@@ -44,7 +47,6 @@ AppRegistry.registerComponent('xBand', () => xBand);
 	^ TODO:
 	change 'RNBoilerplate' to 'xBand' ^^^ when
 	using the android devices instead of simulator
-	:* :* :* :* :* :* :* :* :* :* :* :* :* :* :* :*
 	:* :* :* :* :* :* :* :* :* :* :* :* :* :* :* :*
 	:* :* :* :* :* :* :* :* :* :* :* :* :* :* :* :*
 	:* :* :* :* :* :* :* :* :* :* :* :* :* :* :* :*

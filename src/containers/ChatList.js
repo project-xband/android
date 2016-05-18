@@ -67,7 +67,6 @@ class ChatList extends Component {
 		}
 		console.log('is loaded')
 
-		// return ( <Text style={{marginTop: 100}}>Hey</Text>)
 		return (
 			<ScrollView style = {{ marginTop: 60 }}>
 				{
@@ -77,11 +76,11 @@ class ChatList extends Component {
 
 						return (
 							<TouchableOpacity
-								onPress={ () => { Actions.ChatContainer({ conversationKey: conversationKey }) } }
-								key={ _.uniqueId() }>
+								onPress = { () => { Actions.ChatContainer({ conversationKey: conversationKey }) } }
+								key = { _.uniqueId() }>
 								<ChatCell
 									lastMessage = { message }
-									key={ _.uniqueId() }/>
+									key = { _.uniqueId() }/>
 							</TouchableOpacity>
 						)
 					})
