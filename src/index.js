@@ -41,7 +41,7 @@ const xBand = () => (
   </Provider>
 );
 
-AppRegistry.registerComponent('RNBoilerplate', () => xBand);
+AppRegistry.registerComponent('xBand', () => xBand);
 /*
 	^ TODO:
 	change 'RNBoilerplate' to 'xBand' ^^^ when
