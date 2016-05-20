@@ -13,15 +13,18 @@ import addMessage from './actions/message'
 
 let enhancer
 
-// create the engine with 'xband-to-moon' as the storage key
+// 'xband-to-moon' === storage key
 let engine = createEngine('xband-to-moons')
 engine = filter(engine, [], ['storage'])
 
-// add the storage engine middleware spice
+// add storage engine middleware spice
 const engineMiddleware = storage.createMiddleware(engine)
 const middlewares = [thunk, engineMiddleware]
 
-// if using remote-redux-devtools set them up
+/*
+  TODO:
+  if using remote-redux-devtools set them up down hier.
+ */
 if (__DEV__) {
 
   const devTools = require('remote-redux-devtools')
@@ -68,7 +71,7 @@ export default function configureStore(initialState={}) {
   // At this stage the whole system is in place and every action will trigger
   // a save operation.
 
-  // BUT (!) an existing old state HAS NOT been restored yet!\
+  // BUT (!) an existing old state HAS NOT been restored yet!
   const load = storage.createLoader(engine)
 
   load(store)

@@ -44,7 +44,7 @@ const ChatCell = ({
 					{ ('' + lastMessage.from).charAt(0) }
 				</Text>
 			</View>
-			<View style = {{ flexDirection: 'column', padding: 10 }}>
+			<View style = {{ flexDirection: 'column', padding: 10, width: (Dimensions.get('window').width)/(7/5) }}>
 				<View style = {{ flexDirection: 'row', marginTop: 10 }}>
 					<Text style = { styles.name }>
 						{ lastMessage.from }
@@ -55,26 +55,16 @@ const ChatCell = ({
 				</View>
 				<Text style = { styles.msgPreview }>
 					{
-						(!lastMessage.body === "undefined" && lastMessage.body.length > 30)
-							? lastMessage.body.substring(0, 30) + '...'
+						(lastMessage.body.length > 27)
+							? (lastMessage.body.substring(0, 27) + '...')
 							: lastMessage.body
-
-						/*
-							^ TODO:
-							Display text in monospaced font so that the
-							message preview text is consistently styled
-							and theres no overflow/bad displaying of the
-							last message
-
-							^ TODO: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-							the last message props are being de-allocated with its component
-							which in return doesn't show any messages on the chatCell
-
-							potential fix - pass the last message as we're going back in
-							the stack - from the Chat to the ChatList
+						/**
+						 * ^ TODO:
+						 * Display text in monospaced font so that the
+						 * message preview text is consistently styled
+						 * and theres no overflow/bad displaying of the
+						 * last message
 						 */
-
 					}
 				</Text>
 			</View>
@@ -139,7 +129,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		color: '#9E9E9E',
 		fontSize: 18,
-		textAlign: 'right',
+		textAlign: 'left',
 		textAlignVertical: 'center',
 		marginTop: 2
 	},

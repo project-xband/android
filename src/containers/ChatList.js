@@ -47,21 +47,23 @@ class ChatList extends Component {
 		}
 		console.log('is loaded')
 
-		// return ( <Text style={{marginTop: 100}}>Hey</Text>)
 		return (
 			<ScrollView style = {{ marginTop: 60 }}>
 				{
 					_.map(this.lastMessage(), (keys) => {
+
+            console.log('keys biach',keys)
+
 						const conversationKey = keys.conversationKey
 						const message = this.props.messages[keys.messageKey]
 
 						return (
 							<TouchableOpacity
-								onPress={ () => { Actions.ChatContainer({ conversationKey: conversationKey }) } }
-								key={ _.uniqueId() }>
+								onPress = { () => { Actions.ChatContainer({ conversationKey: conversationKey }) } }
+								key = { _.uniqueId() }>
 								<ChatCell
 									lastMessage = { message }
-									key={ _.uniqueId() }/>
+									key = { _.uniqueId() }/>
 							</TouchableOpacity>
 						)
 					})

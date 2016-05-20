@@ -8,6 +8,7 @@
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "reverse": "adb reverse tcp:8081 tcp:8081 | adb reverse tcp:8080 tcp:8080 | adb reverse tcp:5678 tcp:5678",
     "android": " node node_modules/react-native/local-cli/cli.js run-android",
+    "windows-emulator": "emulator.exe -avd Galaxy_Nexus",
     "lint": "eslint src test *.js",
     "test": "mocha --recursive --compilers js:babel-core/register -r test/setup",
     "cover": "babel-node node_modules/.bin/isparta cover _mocha -- --recursive -r test/setup",

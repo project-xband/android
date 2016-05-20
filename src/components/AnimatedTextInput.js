@@ -112,7 +112,6 @@ export default class AnimatedTextInput extends Component {
 							conversationKey: this.props.conversationKey,
 							body: this.state.text,
 							position: 'right',
-							// ^ this will aways be so when sending <3
 							timestamp: 'Mon'
 							/*
 								^ TODO:

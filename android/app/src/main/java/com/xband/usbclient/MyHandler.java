@@ -129,20 +129,20 @@ public class MyHandler extends Handler {
 
                     if (STARTED == commandState) {
                         if (TERMINATOR_CHARACTER == incomingByte) {
-                            commandBuffer[commandIndex] = (byte) incomingByte;
+//                            commandBuffer[commandIndex] = (byte) incomingByte;
                             commandIndex++;
                             commandBuffer[commandIndex] = 0;
 
-                            byte[] temp = extractPacket(commandBuffer, commandIndex);
+//                            byte[] temp = extractPacket(commandBuffer, commandIndex);
 
                             WritableMap params = Arguments.createMap();
-                            params.putString("content", new String(temp));
+//                            params.putString("content", new String(temp));
                             sendEvent("message", params);
 
                             commandIndex = 0;
                             commandState = CLEAR;
                         } else {
-                            commandBuffer[commandIndex] = (byte)  incomingByte;
+//                            commandBuffer[commandIndex] = (byte)  incomingByte;
                             commandIndex++;
                             if (INPUT_LENGTH < commandIndex) {
                                 WritableMap params = Arguments.createMap();
