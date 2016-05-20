@@ -89,11 +89,11 @@ export default class AnimatedTextInput extends Component {
 								^ TODO:
 								get the global address instead?
 							*/
+							conversationKey: this.props.conversationKey,
 							body: this.state.text,
 							position: 'right',
 							// ^ this will aways be so when sending <3
 							timestamp: 'Mon'
-
 							/*
 								^ TODO:
 								generate the timestamp based
@@ -103,7 +103,23 @@ export default class AnimatedTextInput extends Component {
 						})
 
 						SendModuleAndroid.send({
-							// send the packet format through here
+							uniqueKey: msgkey,
+							from: '44.00.9.15',
+							/*
+								^ TODO:
+								get the global address instead?
+							*/
+							conversationKey: this.props.conversationKey,
+							body: this.state.text,
+							position: 'right',
+							// ^ this will aways be so when sending <3
+							timestamp: 'Mon'
+							/*
+								^ TODO:
+								generate the timestamp based
+								on shannons packet timestamp
+								time formatting
+							*/
 						})
 
 						this.props.addMessageKeyToTheConversation({
@@ -111,7 +127,7 @@ export default class AnimatedTextInput extends Component {
 							conversationKey: this.props.conversationKey
 						})
 
-						this.setState({ text: '' })
+						this.setState({ text: '', colorStyle: styles.gray })
 					}}>
 					<Text style = { [styles.sendButtonText, this.state.colorStyle] }>
 						{'Send'}
@@ -151,7 +167,6 @@ const styles = StyleSheet.create({
 		borderLeftColor: 'transparent',
 		borderRightColor: 'transparent',
 		borderWidth: 1,
-		// paddingTop: 2
 	},
 	txtInput: {
 		flex: 6,
@@ -161,7 +176,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		marginRight: 10,
-		// backgroundColor: '#757575'
 	},
 	sendButtonText: {
 		fontSize: 19,

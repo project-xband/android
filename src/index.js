@@ -3,7 +3,6 @@ import { Provider, connect } from 'react-redux'
 import configureStore from './configureStore'
 
 // components
-import App from './containers/App'
 import ChatList from './containers/ChatList'
 import ChatContainer from './containers/ChatContainer'
 
