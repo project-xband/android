@@ -44,6 +44,7 @@ We are plan on adding
  - make use redux remote dev tools [ ]
  - make a secrets file with the address of user, configs maybe,
    things that are good to have globaly but too important -> need to be secured
+ - onboarding [ ]
 
 
 ## Test

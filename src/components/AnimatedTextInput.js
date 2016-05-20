@@ -103,10 +103,9 @@ export default class AnimatedTextInput extends Component {
 						})
 
 						SendModuleAndroid.send({
-              'from':"123",
-              'to':"234",
-              'msg':this.state.text
-							// send the packet format through here
+              'from': "123",
+              'to': "234",
+              'msg': this.state.text
 						})
 
 						this.props.addMessageKeyToTheConversation({
@@ -114,7 +113,7 @@ export default class AnimatedTextInput extends Component {
 							conversationKey: this.props.conversationKey
 						})
 
-						this.setState({ text: '' })
+						this.setState({ text: '', colorStyle: styles.gray })
 					}}>
 					<Text style = { [styles.sendButtonText, this.state.colorStyle] }>
 						{'Send'}
