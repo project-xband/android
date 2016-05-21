@@ -29,7 +29,8 @@ const mapStateToProps = state => {
  return {
 	  isLoaded: state.storage.isLoaded,
 	  conversation: state.conversation,
-	  messages: state.message
+	  messages: state.message,
+    contact: state.contact
    }
 }
 
@@ -63,6 +64,7 @@ class ChatList extends Component {
 								key = { _.uniqueId() }>
 								<ChatCell
 									lastMessage = { message }
+                  name = { this.props.contact[message.from].name }
 									key = { _.uniqueId() }/>
 							</TouchableOpacity>
 						)

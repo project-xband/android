@@ -1,25 +1,31 @@
 const initialState = {
   [0]: {
-    from: '44.111.2',   // <-- to find who is in conversation look at the 'from',
+    from: '44.3.69',   // <-- to find who is in conversation look at the 'from',
     position: 'right',  // <-- always 'right' on sent
     body: "Hey babe, how's xBand",
     timestamp: 'Mon'
   },
   [1]: {
-    from: '44.3.21',
+    from: '44.3.69',
     position: 'left',   // <-- always 'left' on received
     body: 'Hey, how are you doing habibi?',
     timestamp: 'Mon'
   },
+  [2]: {
+    from: '44.3.66',
+    position: 'right',   // <-- always 'left' on received
+    body: 'Hey, how many schmeckles are left?',
+    timestamp: 'Mon'
+  },
   ['h4rdc0d3dm3ss4ge']: {
-    from: '44.3.21',
+    from: '7777777',
     position: 'left',
     body: "xBand is the coolest",
     timestamp: 'Mon'
   },
-  ['h4rdc0d3dm3ss4ge']: {
-    from: '44.3.21',
-    position: 'left',
+  ['h4rdc0d3dm3nets']: {
+    from: '97.03.09',
+    position: 'right',
     body: "xBand is swank",
     timestamp: 'Mon'
   }

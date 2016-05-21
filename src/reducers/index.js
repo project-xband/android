@@ -7,4 +7,4 @@ export default storage.reducer(combineReducers({
   conversation: require('./conversation'),
   routes: require('./routes'),
   storage: require('./storage')
-}));
+}))

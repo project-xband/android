@@ -5,7 +5,15 @@ const initialState = {
   },
   ['h4rdc0d3d2']: {
     draft: '',
-    messages: [0]
+    messages: [2]
+  },
+  ['h4rdc323d2']: {
+    draft: '',
+    messages: ['h4rdc0d3dm3ss4ge']
+  },
+  ['h4rd1td3d2']: {
+    draft: '',
+    messages: ['h4rdc0d3dm3nets']
   }
 }
 /*
