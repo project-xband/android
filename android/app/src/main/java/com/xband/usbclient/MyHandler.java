@@ -1,5 +1,6 @@
 package com.xband.usbclient;
 
+import java.util.Arrays;
 import android.util.Log;
 import android.os.Handler;
 import android.os.Message;
@@ -69,7 +70,6 @@ public class MyHandler extends Handler {
                 }
                 calculatedLength++;
             }
-            Log.d("what","what is happening " + flag);
             if (!flag) return null;
 
             unframedData = new byte[calculatedLength + 2];
@@ -133,20 +133,23 @@ public class MyHandler extends Handler {
                         if (TERMINATOR_CHARACTER == incomingByte) {
                             commandBuffer[commandIndex] = incomingByte;
                             commandIndex++;
-                            commandBuffer[commandIndex] = 0;
-
                             byte[] temp = extractPacket(commandBuffer, commandIndex);
-
-                            Log.d("recieving", new String(commandBuffer));
-                            // Log.d("recieving", new String(temp));
+                            byte to = temp[0];
+                            byte from = temp[1];
+                            temp[0] = temp[1] = 0;
+                            String message = new String(temp);
+                            message = message.trim();
+                            Log.d("headers", "from:"+from+"|to:"+to+"|msg:"+message+"|");
                             WritableMap params = Arguments.createMap();
-                            // params.putString("content", new String(temp));
+                            params.putString("msg", message);
+                            params.putString("from", Byte.toString(from));
+                            params.putString("to", Byte.toString(to));
                             sendEvent("message", params);
 
                             commandIndex = 0;
                             commandState = CLEAR;
                         } else {
-//                            commandBuffer[commandIndex] = (byte)  incomingByte;
+                            commandBuffer[commandIndex] = incomingByte;
                             commandIndex++;
                             if (INPUT_LENGTH < commandIndex) {
                                 WritableMap params = Arguments.createMap();
