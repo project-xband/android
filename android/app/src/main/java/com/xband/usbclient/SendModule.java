@@ -28,19 +28,36 @@ public class SendModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void send(ReadableMap message) {
+      // Expects JSON Object
+      // with params: from, to, msg
 
-        ReadableMapKeySetIterator it = message.keySetIterator();
-        while (it.hasNextKey()) {
-            String temp = message.getString(it.nextKey());
-            Log.d("sendingpackets",temp);
-        }
+      byte from = new Byte(message.getString("from"));
+      byte to = new Byte(message.getString("to"));
+      String content = message.getString("msg");
+
+      Log.d("sending",content);
+
+      // Get the original bytes and
+      // account for 2 address bytes
+      byte[] msgbytes = content.getBytes();
+      int msglength = msgbytes.length;
+
+      // Create packet
+      // 0    1    2    ...
+      // byte byte string
+      // from  to  content
+      byte[] header = {to,from};
+      byte[] packet = new byte[msglength+2];
+      System.arraycopy(header, 0, packet, 0, 2);
+      System.arraycopy(msgbytes, 0, packet, 2, msglength);
+
+
         if (UsbService.SERVICE_CONNECTED) {
-//            framePacket(message.getBytes(),message.length());
-//            UsbService.write(framedData);
+            UsbService.write(framePacket(packet,packet.length));
         }
     }
 
-    public void framePacket(byte[] packetData,int packetLength) {
+    public byte[] framePacket(byte[] packetData,int packetLength) {
         int index;
         int pData;
         int calculatedLength;
@@ -86,5 +103,6 @@ public class SendModule extends ReactContextBaseJavaModule {
         }
         framedData[vindex++] = '}';
         framedLength = calculatedLength;
+        return framedData;
     }
 }

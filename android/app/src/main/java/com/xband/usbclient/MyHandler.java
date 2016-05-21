@@ -1,5 +1,6 @@
 package com.xband.usbclient;
 
+import android.util.Log;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -68,6 +69,7 @@ public class MyHandler extends Handler {
                 }
                 calculatedLength++;
             }
+            Log.d("what","what is happening " + flag);
             if (!flag) return null;
 
             unframedData = new byte[calculatedLength + 2];
@@ -100,17 +102,17 @@ public class MyHandler extends Handler {
         return null;
     }
 
-    private final char CLEAR = 0;
-    private final char STARTED = 1;
-    private final char SYNC_CHARACTER = '{';
-    private final char TERMINATOR_CHARACTER = '}';
+    private final byte CLEAR = 0;
+    private final byte STARTED = 1;
+    private final byte SYNC_CHARACTER = '{';
+    private final byte TERMINATOR_CHARACTER = '}';
     private final int INPUT_LENGTH = 250;
 
     private char incomingByte;   // for incoming serial data
     private char reliableLength;
-    private char commandIndex = 0;
-    private char commandState = CLEAR;
-    private char[] commandBuffer = new char[INPUT_LENGTH + 2];
+    private byte commandIndex = 0;
+    private byte commandState = CLEAR;
+    private byte[] commandBuffer = new byte[INPUT_LENGTH + 2];
 
     @Override
     public void handleMessage(Message msg) {
@@ -120,7 +122,7 @@ public class MyHandler extends Handler {
 
                 String data = (String) msg.obj;
 
-                for (char incomingByte:data.toCharArray()) {
+                for (byte incomingByte:data.getBytes()) {
                     if (CLEAR == commandState){
                         if (SYNC_CHARACTER == incomingByte) {
                             commandState = STARTED;
@@ -129,14 +131,16 @@ public class MyHandler extends Handler {
 
                     if (STARTED == commandState) {
                         if (TERMINATOR_CHARACTER == incomingByte) {
-//                            commandBuffer[commandIndex] = (byte) incomingByte;
+                            commandBuffer[commandIndex] = incomingByte;
                             commandIndex++;
                             commandBuffer[commandIndex] = 0;
 
-//                            byte[] temp = extractPacket(commandBuffer, commandIndex);
+                            byte[] temp = extractPacket(commandBuffer, commandIndex);
 
+                            Log.d("recieving", new String(commandBuffer));
+                            // Log.d("recieving", new String(temp));
                             WritableMap params = Arguments.createMap();
-//                            params.putString("content", new String(temp));
+                            // params.putString("content", new String(temp));
                             sendEvent("message", params);
 
                             commandIndex = 0;

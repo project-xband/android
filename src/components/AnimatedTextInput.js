@@ -103,8 +103,8 @@ export default class AnimatedTextInput extends Component {
 						})
 
 						SendModuleAndroid.send({
-              'from': "123",
-              'to': "234",
+              'from': "1",
+              'to': "2",
               'msg': this.state.text
 						})
 
