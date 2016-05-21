@@ -31,29 +31,30 @@ public class SendModule extends ReactContextBaseJavaModule {
       // Expects JSON Object
       // with params: from, to, msg
 
-      byte from = new Byte(message.getString("from"));
-      byte to = new Byte(message.getString("to"));
-      String content = message.getString("msg");
+      byte from      = new Byte(message.getString("from"));
+      byte to        = new Byte(message.getString("to"));
+      byte conKey    = new Byte(message.getString("conKey"));
+      String content = message.getString("body");
 
-      Log.d("sending",content);
+      Log.d("sending", content);
 
       // Get the original bytes and
       // account for 2 address bytes
       byte[] msgbytes = content.getBytes();
-      int msglength = msgbytes.length;
+      int msglength   = msgbytes.length;
 
       // Create packet
-      // 0    1    2    ...
-      // byte byte string
+      //   0    1    2    5    6    9    10...
+      // byte|byte|convo key| msg key |body
       // from  to  content
-      byte[] header = {to,from};
-      byte[] packet = new byte[msglength+2];
-      System.arraycopy(header, 0, packet, 0, 2);
-      System.arraycopy(msgbytes, 0, packet, 2, msglength);
+      byte[] header = { to, from, conKey };
+      byte[] packet = new byte[msglength + 3];
+      System.arraycopy(header, 0, packet, 0, 3);
+      System.arraycopy(msgbytes, 0, packet, 3, msglength);
 
 
         if (UsbService.SERVICE_CONNECTED) {
-            UsbService.write(framePacket(packet,packet.length));
+            UsbService.write(framePacket(packet, packet.length));
         }
     }
 

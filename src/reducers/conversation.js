@@ -1,20 +1,20 @@
 const initialState = {
-  ['h4rdc0d3d']: {
+  [0]: {
     draft: 'Hey, I just wanted to check in if ',
     participants: ['44.3.69', '44.3.66'],
     messages: [0, 2]    // <-- access 'last' sent message (first in the Array) for sorting the conversation
   },
-  ['h4rdc0d3d2']: {
+  [1]: {
     draft: '',
     participants: ['44.3.21', '44.3.66'],
     messages: [1, 2]
   },
-  ['h4rdc323d2']: {
+  [2]: {
     draft: '',
     participants: ['44.3.1', '44.3.5'],
     messages: ['h4rdc0d3dm3ss4ge', 'h4rdc0d3dm3nets']
   },
-  ['h4rd1td3d2']: {
+  [3]: {
     draft: '',
     participants: ['44.3.69', '44.3.5'],
     messages: [0]
@@ -35,7 +35,7 @@ const actionsMap = {
       ^ TODO:
       could be potentially harmful because it's just
       a shallow copy fo the state, just the pointers,
-      it's not pure anc can couse fuego later?
+      it's not pure and can cause fuego later?
      */
 
     // make a copy of the messages array and set it to the new array

@@ -43,25 +43,49 @@ if (__DEV__) {
 export default function configureStore(initialState={}) {
   const store = createStore(reducer, initialState, enhancer)
 
+  var generateUniqueKey = function(str) {
+    // TODO 32 BIT
+    return hashFnv32a(str, true, undefined)
+  }
+
+  var hashFnv32a = function(str, asString, seed) {
+    /*jshint bitwise:false */
+    var i, l,
+        hval = (seed === undefined) ? 0x811c9dc5 : seed
+
+    for (i = 0, l = str.length; i < l; i++) {
+        hval ^= str.charCodeAt(i)
+        hval += (hval << 1) + (hval << 4) + (hval << 7) + (hval << 8) + (hval << 24)
+    }
+    if( asString ){
+        // Convert to 8 digit hex string
+        return ("0000000" + (hval >>> 0).toString(16)).substr(-8)
+    }
+    return hval >>> 0
+  }
+
   // add the message listener here
   DeviceEventEmitter.addListener('message', (message) => {
+    alert('Got a message! '+message.from+': ' + message.body)
 
+    const uniqueKey = generateUniqueKey(message.body)
+    // alert()
     store.dispatch(
-      addMessage ({
-        uniqueKey: message.uniqueKey,
+      addMessage({
+        uniqueKey: 2,
         from: message.from,
         to: message.to,
-        conversationKey: message.conversationKey,
+        conversationKey: 0,
         body: message.body,
         position: 'left',
-        timestamp: message.timestamp
+        timestamp: 'Mon'
       })
     )
 
     store.dispatch(
       addMessageKeyToTheConversation ({
-        uniqueKey: message.uniqueKey,
-        conversationKey: message.conversationKey
+        uniqueKey: uniqueKey,
+        conversationKey: message.conKey
       })
     )
   })

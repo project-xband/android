@@ -55,7 +55,8 @@ export default class Chat extends Component {
 																					 }}
 					addMessage 										 = { this.props.addMessage }
 					addMessageKeyToTheConversation = { this.props.addMessageKeyToTheConversation }
-					conversationKey 							 = { this.props.conversationKey }/>
+					conversationKey 							 = { this.props.conversationKey }
+					device                         = { this.props.device.address }/>
 			</View>
 		)
 	}
@@ -64,10 +65,10 @@ export default class Chat extends Component {
 const styles = StyleSheet.create({
 	reading: {
 		// flex: 8
-		height: Dimensions.get('window').height * 0.84
+		height: Dimensions.get('window').height * 0.79
 	},
 	typing: {
 		// flex: 4
-		height: Dimensions.get('window').height * 0.5
+		height: Dimensions.get('window').height * 0.37
 	}
 })

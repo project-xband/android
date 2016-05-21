@@ -133,17 +133,26 @@ public class MyHandler extends Handler {
                         if (TERMINATOR_CHARACTER == incomingByte) {
                             commandBuffer[commandIndex] = incomingByte;
                             commandIndex++;
+                            
                             byte[] temp = extractPacket(commandBuffer, commandIndex);
                             byte to = temp[0];
                             byte from = temp[1];
-                            temp[0] = temp[1] = 0;
+                            byte conKey = temp[2];
+
+                            temp[0] = temp[1] = temp[2] = 0;
+
                             String message = new String(temp);
+                            
                             message = message.trim();
-                            Log.d("headers", "from:"+from+"|to:"+to+"|msg:"+message+"|");
+                            
+                            Log.d("headers", "from:"+from+"|to:"+to+"|conKey:"+conKey+"|msg:"+message+"|");
+                            
                             WritableMap params = Arguments.createMap();
-                            params.putString("msg", message);
-                            params.putString("from", Byte.toString(from));
-                            params.putString("to", Byte.toString(to));
+                            params.putString("body",   message);
+                            params.putString("from",   Byte.toString(from));
+                            params.putString("to",     Byte.toString(to));
+                            params.putString("conKey", Byte.toString(to));
+                            
                             sendEvent("message", params);
 
                             commandIndex = 0;

@@ -36,7 +36,8 @@ import * as ConversationActions from '../actions/conversation'
 
 const mapStateToProps = state => ({
   messages: state.message,
-  conversation: state.conversation
+  conversation: state.conversation,
+  device: state.device
 })
 
 function mapDispatchToProps(dispatch) {

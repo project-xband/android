@@ -5,6 +5,7 @@ export default storage.reducer(combineReducers({
   message: require('./message'),
   contact: require('./contact'),
   conversation: require('./conversation'),
+  device: require('./device'),
   routes: require('./routes'),
   storage: require('./storage')
 }))
