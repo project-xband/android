@@ -8,8 +8,8 @@
 	really is #futurerefactor
 */
 
-import React, {
-	Component,
+import React, { Component } from 'react'
+import {
 	PropTypes,
 	View,
 	Text,
@@ -17,26 +17,6 @@ import React, {
 	TouchableOpacity,
 	TouchableHighlight
 } from 'react-native'
-
-/*
-  ^ there is a new format they said (new RN 0.25.1)
-  where the import is like -->
-
-  ````
-    import React, { Component } from 'react'
-    import {
-      PropTypes,
-      StyleSheet,
-      Dimensions,
-      Text,
-      TextInput,
-      View,
-      TouchableHighlight
-    } from 'react-native'
-  ````
-
-  (https://github.com/facebook/react-native/releases/tag/v0.25.1)
-*/
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
@@ -49,7 +29,8 @@ const mapStateToProps = state => {
  return {
 	  isLoaded: state.storage.isLoaded,
 	  conversation: state.conversation,
-	  messages: state.message
+	  messages: state.message,
+    contact: state.contact
    }
 }
 
@@ -83,6 +64,7 @@ class ChatList extends Component {
 								key = { _.uniqueId() }>
 								<ChatCell
 									lastMessage = { message }
+                  name = { this.props.contact[message.from].name }
 									key = { _.uniqueId() }/>
 							</TouchableOpacity>
 						)

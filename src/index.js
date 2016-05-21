@@ -3,7 +3,6 @@ import { Provider, connect } from 'react-redux'
 import configureStore from './configureStore'
 
 // components
-// import App from './containers/App'
 import ChatList from './containers/ChatList'
 import ChatContainer from './containers/ChatContainer'
 
@@ -23,19 +22,19 @@ const xBand = () => (
 					component = { ChatList }
 					title = "Recent"
 					initial = { true }/>
-					<Scene
-						key = "ChatContainer"
-						component = { ChatContainer }
-						title = {
-						"[friend name]"
-					 	/*
-					 		^ TODO:
-					 		set the title string from the
-					 		message.from, not sure how yet :(
+				<Scene
+					key = "ChatContainer"
+					component = { ChatContainer }
+					title = {
+					"[friend name]"
+				 	/*
+				 		^ TODO:
+				 		set the title string from the
+				 		message.from, not sure how yet :(
 
-					 		^ TODO:
-					 		Add bottom tab bar in here as well
-					 	*/}/>
+				 		^ TODO:
+				 		Add bottom tab bar in here as well
+				 	*/}/>
 			</Scene>
     </RouterWithRedux>
   </Provider>

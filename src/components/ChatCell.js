@@ -34,6 +34,7 @@ import React, {
 */
 const ChatCell = ({
 	lastMessage,
+	name,
 	messages
 }) =>
 	<View>
@@ -41,13 +42,13 @@ const ChatCell = ({
 			{ console.log('lastMessage', lastMessage) }
 			<View style = { styles.image }>
 				<Text style = { styles.initial }>
-					{ ('' + lastMessage.from).charAt(0) }
+					{ ('' + name).charAt(0) }
 				</Text>
 			</View>
-			<View style = {{ flexDirection: 'column', padding: 10, width: (Dimensions.get('window').width)/(7/5) }}>
-				<View style = {{ flexDirection: 'row', marginTop: 10 }}>
+			<View style = { styles.infoBox }>
+				<View style = { styles.namedate }>
 					<Text style = { styles.name }>
-						{ lastMessage.from }
+						{ name }
 					</Text>
 					<Text style = { styles.day }>
 						{ lastMessage.timestamp }
@@ -55,8 +56,8 @@ const ChatCell = ({
 				</View>
 				<Text style = { styles.msgPreview }>
 					{
-						(lastMessage.body.length > 27)
-							? (lastMessage.body.substring(0, 27) + '...')
+						(lastMessage.body.length > 25)
+							? (lastMessage.body.substring(0, 25) + '...')
 							: lastMessage.body
 						/**
 						 * ^ TODO:
@@ -89,6 +90,15 @@ ChatCell.defaultProps = {
 const styles = StyleSheet.create({
 	cell: {
 		flexDirection: 'row'
+	},
+	infoBox: {
+		flexDirection: 'column',
+		padding: 10,
+		width: (Dimensions.get('window').width)/(7/5)
+	},
+	namedate:{
+		flexDirection: 'row',
+		marginTop: 10
 	},
 	image: {
 		height: Dimensions.get('window').width / 6,
