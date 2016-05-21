@@ -1,19 +1,19 @@
 import _ from 'lodash'
 
 const initialState = {
-  '97.03.09': {
-    name: 'poopiepi'
-  },
   '44.3.21': {
-    name: 'Keviiin'
+    name: 'Kazu'
+  },
+  '44.3.1': {
+    name: 'Kevin'
   },
   '44.3.66': {
-    name: 'Jdoge'
+    name: 'Fero'
   },
   '44.3.69': {
-    name: 'Dennis'
+    name: 'jden'
   },
-  '7777777': {
+  '44.3.5': {
     name: 'Shannon'
   }
 }

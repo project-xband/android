@@ -13,7 +13,7 @@ import addMessage from './actions/message'
 
 let enhancer
 
-// 'xband-to-moon' === storage key
+// 'xband-to-moons' === storage key
 let engine = createEngine('xband-to-moons')
 engine = filter(engine, [], ['storage'])
 
@@ -46,19 +46,24 @@ export default function configureStore(initialState={}) {
   // add the message listener here
   DeviceEventEmitter.addListener('message', (message) => {
 
-    store.dispatch(addMessage({
-      uniqueKey: message.uniqueKey,
-      from: message.from,
-      conversationKey: message.conversationKey,
-      body: message.body,
-      position: 'left',
-      timestamp: message.timestamp
-    }))
+    store.dispatch(
+      addMessage ({
+        uniqueKey: message.uniqueKey,
+        from: message.from,
+        to: message.to,
+        conversationKey: message.conversationKey,
+        body: message.body,
+        position: 'left',
+        timestamp: message.timestamp
+      })
+    )
 
-    store.dispatch(addMessageKeyToTheConversation({
-      uniqueKey: message.uniqueKey,
-      conversationKey: message.conversationKey
-    }))
+    store.dispatch(
+      addMessageKeyToTheConversation ({
+        uniqueKey: message.uniqueKey,
+        conversationKey: message.conversationKey
+      })
+    )
   })
 
   // if using hot modules replace the reducers

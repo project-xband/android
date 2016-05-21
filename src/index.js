@@ -22,25 +22,25 @@ const xBand = () => (
 					component = { ChatList }
 					title = "Recent"
 					initial = { true }/>
-					<Scene
-						key = "ChatContainer"
-						component = { ChatContainer }
-						title = {
-						"[friend name]"
-					 	/*
-					 		^ TODO:
-					 		set the title string from the
-					 		message.from, not sure how yet :(
+				<Scene
+					key = "ChatContainer"
+					component = { ChatContainer }
+					title = {
+					"[friend name]"
+				 	/*
+				 		^ TODO:
+				 		set the title string from the
+				 		message.from, not sure how yet :(
 
-					 		^ TODO:
-					 		Add bottom tab bar in here as well
-					 	*/}/>
+				 		^ TODO:
+				 		Add bottom tab bar in here as well
+				 	*/}/>
 			</Scene>
     </RouterWithRedux>
   </Provider>
 );
 
-AppRegistry.registerComponent('RNBoilerplate', () => xBand);
+AppRegistry.registerComponent('xBand', () => xBand);
 /*
 	^ TODO:
 	change 'RNBoilerplate' to 'xBand' ^^^ when
